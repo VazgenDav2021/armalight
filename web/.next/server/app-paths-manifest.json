@@ -1,9 +1,0 @@
-{
-  "/not-found": "app/not-found.js",
-  "/[locale]/sign-in/page": "app/[locale]/sign-in/page.js",
-  "/[locale]/register/page": "app/[locale]/register/page.js",
-  "/[locale]/forgot-password/page": "app/[locale]/forgot-password/page.js",
-  "/[locale]/reset-password/page": "app/[locale]/reset-password/page.js",
-  "/[locale]/page": "app/[locale]/page.js",
-  "/[locale]/(shop)/account/page": "app/[locale]/(shop)/account/page.js"
-}
