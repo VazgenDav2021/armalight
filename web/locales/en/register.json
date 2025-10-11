@@ -1,0 +1,16 @@
+{
+    "register": {
+        "metadata": {
+            "TITLE": "Register | ArmLight",
+            "DESCRIPTION": "Create a new account and start using our services"
+        },
+        "title": "Register",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "register": "Sign Up",
+        "alreadyHaveAccount": "Already have an account?",
+        "signIn": "Sign In"
+    }
+}

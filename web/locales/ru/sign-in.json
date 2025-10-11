@@ -1,0 +1,16 @@
+{
+    "signIn": {
+        "metadata": {
+            "TITLE": "Вход в систему",
+            "DESCRIPTION": "Войдите в свой аккаунт, используя email и пароль"
+        },
+        "title": "Вход в систему",
+        "mail": "Эл. почта",
+        "password": "Пароль",
+        "forgetPassword": "Забыли пароль?",
+        "enter": "Войти",
+        "dontHaveAccount": "Нет аккаунта?",
+        "register": "Зарегистрироваться",
+        "invalidCredentials": "Эл. почта или пароль введены неверно"
+    }
+}

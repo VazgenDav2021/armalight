@@ -1,0 +1,59 @@
+{
+    "account": {
+        "metadata": {
+            "TITLE": "My Account",
+            "DESCRIPTION": "Manage your personal information, orders, and bank cards"
+        },
+        "Grreeting": "Hello",
+        "MENU_ITEMS": [
+            {
+                "id": "personal",
+                "label": "Personal Data"
+            },
+            {
+                "id": "orders",
+                "label": "Order History"
+            },
+            {
+                "id": "cards",
+                "label": "Bank Cards"
+            }
+        ],
+        "PERSONAL_DATA": {
+            "title": "Personal Data",
+            "name": "First Name",
+            "surName": "Last Name",
+            "email": "Email",
+            "phone": "Phone Number",
+            "city": "City",
+            "address": "Address",
+            "index": "Postal Code",
+            "cancel": "Cancel",
+            "save": "Save"
+        },
+        "ORDERS": {
+            "meta": {
+                "TITLE": "My Orders | My Account",
+                "DESCRIPTION": "View your purchase history and order details"
+            },
+            "title": "My Orders",
+            "orderNumber": "Order Number",
+            "itemQnty": "Item Quantity",
+            "date": "Date",
+            "price": "Price",
+            "noOrder": "You don’t have any orders yet",
+            "startShopping": "Start Shopping",
+            "PRODUCT_ID": "Product ID"
+        },
+        "CARDS": {
+            "meta": {
+                "TITLE": "My Cards | My Account",
+                "DESCRIPTION": "Manage and remove your linked cards"
+            },
+            "title": "My Cards",
+            "holderName": "Cardholder Name",
+            "remove": "Remove"
+        },
+        "exit": "Logout"
+    }
+}

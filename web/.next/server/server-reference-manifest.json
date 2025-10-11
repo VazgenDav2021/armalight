@@ -1,0 +1,22 @@
+{
+  "node": {
+    "e6ea196d12d03d8174d1d5825a558d3c9b3aa8c0": {
+      "workers": {
+        "app/[locale]/page": "(rsc)/./node_modules/.pnpm/next@14.0.2_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fvazgendavtyan%2FDesktop%2Fdocs%2Fmy-shop-full%2Fweb%2Fsrc%2Fapp%2F%5Blocale%5D%2Fpage.tsx%22%2C%5B%22generateMetadata%22%2C%22default%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/[locale]/page": "rsc"
+      }
+    },
+    "75a441b0707854451863a0c7fc7a0f612e92aba1": {
+      "workers": {
+        "app/[locale]/page": "(rsc)/./node_modules/.pnpm/next@14.0.2_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fvazgendavtyan%2FDesktop%2Fdocs%2Fmy-shop-full%2Fweb%2Fsrc%2Fapp%2F%5Blocale%5D%2Fpage.tsx%22%2C%5B%22generateMetadata%22%2C%22default%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/[locale]/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "j3509smzIoeGHTuylBtv38dnwi8Pu0e38LrMqF6BM8E="
+}

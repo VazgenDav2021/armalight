@@ -1,0 +1,146 @@
+"use client";
+
+import { useState } from "react";
+import { User } from "@/lib/types";
+import { useTranslations } from "next-intl";
+import { authService, UpdateProfileData } from "@/services/authService";
+
+interface IPersonalDataProps {
+  user: User | null;
+}
+
+export default function PersonalData({ user }: IPersonalDataProps) {
+  const t = useTranslations("account.PERSONAL_DATA");
+
+  // Локальное состояние формы
+  const [formData, setFormData] = useState<UpdateProfileData>({
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    address: user?.address || "",
+    city: user?.city || "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const onChange = (field: keyof UpdateProfileData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const onCancel = () => {
+    if (typeof window !== "undefined") window.history.back();
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const updatedUser = await authService.updateProfile(formData);
+      setMessage("Данные успешно обновлены!");
+      // Можно обновить состояние родителя, если нужно
+      console.log("Updated user:", updatedUser);
+    } catch (err: any) {
+      setMessage(err.message || "Ошибка при обновлении данных");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section aria-labelledby="personal-data-title" className="w-[500px]">
+      <h2
+        id="personal-data-title"
+        className="text-[24px] leading-[150%] font-normal text-[#565656] mb-6">
+        {t("title")}
+      </h2>
+
+      <form className="space-y-6" onSubmit={onSubmit}>
+        <div className="flex flex-col">
+          <label className="text-sm font-normal text-[#565656] mb-1">
+            {t("name")}
+          </label>
+          <input
+            type="text"
+            value={formData.firstName}
+            onChange={(e) => onChange("firstName", e.target.value)}
+            placeholder={t("name")}
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-[#565656] focus:border-brand focus:ring-brand"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-sm font-normal text-[#565656] mb-1">
+            {t("surName")}
+          </label>
+          <input
+            type="text"
+            value={formData.lastName}
+            onChange={(e) => onChange("lastName", e.target.value)}
+            placeholder={t("surName")}
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-[#565656] focus:border-brand focus:ring-brand"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-sm font-normal text-[#565656] mb-1">
+            {t("email")}
+          </label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => onChange("email", e.target.value)}
+            placeholder="name@example.com"
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-[#565656] focus:border-brand focus:ring-brand"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-sm font-normal text-[#565656] mb-1">
+            {t("phone")}
+          </label>
+          <input
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => onChange("phone", e.target.value)}
+            placeholder="+374 ..."
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-[#565656] focus:border-brand focus:ring-brand"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-sm font-normal text-[#565656] mb-1">
+            {t("address")}
+          </label>
+          <input
+            type="text"
+            value={formData.address}
+            onChange={(e) => onChange("address", e.target.value)}
+            placeholder={t("address")}
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-[#565656] focus:border-brand focus:ring-brand"
+          />
+        </div>
+
+        {message && <p className="text-sm text-green-600">{message}</p>}
+
+        <div className="flex gap-2 pt-2">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="w-full px-4 py-2 rounded-md border border-gray-300 text-[#565656] hover:bg-gray-50 text-sm font-medium transition">
+            {t("cancel")}
+          </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full px-4 py-2 rounded-md bg-brand text-white text-sm font-medium hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 transition">
+            {loading ? "Сохраняем..." : t("save")}
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+}

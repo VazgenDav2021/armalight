@@ -1,0 +1,15 @@
+{
+    "orderConfirmation": {
+        "metadata": {
+            "TITLE": "Armlight | Order Successfully Placed",
+            "DESCRIPTION": "Thank you for your order. Your order has been successfully registered and is being processed.",
+            "KEYWORDS": "Armlight, order, confirmation, successfully placed, delivery",
+            "OG_TITLE": "Armlight | Order Registered",
+            "OG_DESCRIPTION": "Your order has been successfully registered. We will confirm the delivery details shortly.",
+            "TWITTER_TITLE": "Armlight | Order Confirmation",
+            "TWITTER_DESCRIPTION": "Thank you for your trust. Your order has been successfully registered."
+        },
+        "TITLE": "Your order has been successfully placed",
+        "BUTTON_TITLE": "Continue Shopping"
+    }
+}

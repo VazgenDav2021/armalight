@@ -1,0 +1,24 @@
+{
+    "contact": {
+        "metadata": {
+            "TITLE": "Have Questions?",
+            "DESCRIPTION": "Get in touch with us by filling out the form or using the provided contact details.",
+            "KEYWORDS": "Armlight, contact, email, phone, address",
+            "OG_TITLE": "Have Questions?",
+            "OG_DESCRIPTION": "We are always ready to answer your questions and provide additional information.",
+            "TWITTER_TITLE": "Have Questions?",
+            "TWITTER_DESCRIPTION": "Contact the Armlight team."
+        },
+        "form": {
+            "title": "Have Questions?",
+            "namePlaceholder": "Your Name",
+            "emailPlaceholder": "Email",
+            "phonePlaceholder": "Phone",
+            "messagePlaceholder": "Write your message",
+            "submit": "Submit"
+        },
+        "info": {
+            "ourAddress": "Our Address"
+        }
+    }
+}

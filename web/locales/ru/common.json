@@ -1,0 +1,85 @@
+{
+    "common": {
+        "navigation": {
+            "searchTitle": "Поиск",
+            "children": [
+                {
+                    "title": "Товары",
+                    "type": "dropdown",
+                    "children": [
+                        {
+                            "title": "Светодиодные лампы",
+                            "url": "/category/led-lamps"
+                        },
+                        {
+                            "title": "Светодиодные светильники",
+                            "url": "/category/led-lights"
+                        },
+                        {
+                            "title": "Наружное освещение",
+                            "url": "/category/external-lighting"
+                        },
+                        {
+                            "title": "Светодиодные прожекторы",
+                            "url": "/category/led-headlights"
+                        }
+                    ]
+                },
+                {
+                    "title": "О нас",
+                    "type": "link",
+                    "url": "/about"
+                },
+                {
+                    "title": "Контакты",
+                    "type": "link",
+                    "url": "/contact"
+                }
+            ]
+        },
+        "loginButton": {
+            "title": "Войти",
+            "url": "/auth"
+        },
+        "footer": {
+            "LINKS": {
+                "title": "Важные ссылки",
+                "children": [
+                    {
+                        "title": "О нас",
+                        "url": "/about"
+                    },
+                    {
+                        "title": "Условия и положения",
+                        "url": "/terms"
+                    }
+                ]
+            },
+            "CONTACT_INFO": {
+                "title": "Свяжитесь с нами",
+                "children": [
+                    {
+                        "type": "email",
+                        "title": "contact@armalight.am"
+                    },
+                    {
+                        "type": "phone",
+                        "title": "+374 55 000 000"
+                    },
+                    {
+                        "type": "geo",
+                        "title": "Комитаса 6/1, Ереван"
+                    }
+                ]
+            },
+            "FOLLOR_US": {
+                "title": "Подписывайтесь на нас"
+            }
+        },
+        "cartDrawer": {
+            "title": "Добавлено в корзину",
+            "goToCart": "Перейти в корзину и оплатить",
+            "continueShopping": "Продолжить покупки"
+        }
+    }
+}

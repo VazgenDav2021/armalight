@@ -1,0 +1,24 @@
+{
+    "contact": {
+        "metadata": {
+            "TITLE": "Есть вопросы?",
+            "DESCRIPTION": "Свяжитесь с нами, заполнив форму или используя указанные контакты.",
+            "KEYWORDS": "Armlight, контакт, email, телефон, адрес",
+            "OG_TITLE": "Есть вопросы?",
+            "OG_DESCRIPTION": "Мы всегда готовы ответить на ваши вопросы и предоставить дополнительную информацию.",
+            "TWITTER_TITLE": "Есть вопросы?",
+            "TWITTER_DESCRIPTION": "Свяжитесь с командой Armlight."
+        },
+        "form": {
+            "title": "Есть вопросы?",
+            "namePlaceholder": "Ваше имя",
+            "emailPlaceholder": "Эл. почта",
+            "phonePlaceholder": "Телефон",
+            "messagePlaceholder": "Напишите ваше сообщение",
+            "submit": "Отправить"
+        },
+        "info": {
+            "ourAddress": "Наш адрес"
+        }
+    }
+}

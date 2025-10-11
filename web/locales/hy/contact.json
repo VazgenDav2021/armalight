@@ -1,0 +1,24 @@
+{
+    "contact": {
+        "metadata": {
+            "TITLE": "Ունե՞ք հարցեր",
+            "DESCRIPTION": "Կապվեք մեզ հետ՝ լրացնելով ձևը կամ օգտագործելով նշված տվյալները։",
+            "KEYWORDS": "Armlight, կապ, էլ. փոստ, հեռախոս, հասցե",
+            "OG_TITLE": "Ունե՞ք հարցեր",
+            "OG_DESCRIPTION": "Մենք միշտ պատրաստ ենք պատասխանել ձեր հարցերին և տրամադրել լրացուցիչ տեղեկություն։",
+            "TWITTER_TITLE": "Ունե՞ք հարցեր",
+            "TWITTER_DESCRIPTION": "Կապվեք Armlight-ի թիմի հետ։"
+        },
+        "form": {
+            "title": "Ունե՞ք հարցեր",
+            "namePlaceholder": "Ձեր անունը",
+            "emailPlaceholder": "Էլ. փոստ",
+            "phonePlaceholder": "Հեռ․",
+            "messagePlaceholder": "Գրեք ձեր նամակը",
+            "submit": "Ուղարկել"
+        },
+        "info": {
+            "ourAddress": "Մեր հասցեն"
+        }
+    }
+}

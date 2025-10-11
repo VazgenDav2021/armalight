@@ -1,0 +1,10 @@
+{
+    "registerSuccess": {
+        "metadata": {
+            "TITLE": "Registration Successful | ArmLight",
+            "DESCRIPTION": "Your registration has been completed successfully, you can now sign in"
+        },
+        "message": "Your registration was successful",
+        "signIn": "Sign In"
+    }
+}

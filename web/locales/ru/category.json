@@ -1,0 +1,12 @@
+{
+    "category": {
+        "metadata": {
+            "TITLE": "{name} | ArmLight",
+            "DESCRIPTION": "Найдите товары категории {name} в нашем магазине.",
+            "KEYWORDS": "{name}, светодиоды, светильники, магазин",
+            "OG_TITLE": "{name} — {site}",
+            "OG_DESCRIPTION": "Товары из категории {name}.",
+            "TWITTER_TITLE": "{name}"
+        }
+    }
+}

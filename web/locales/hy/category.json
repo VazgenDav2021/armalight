@@ -1,0 +1,12 @@
+{
+    "category": {
+        "metadata": {
+            "TITLE": "{name} | ArmLight",
+            "DESCRIPTION": "Գտեք {name} կատեգորիայի ապրանքներ մեր խանութում։",
+            "KEYWORDS": "{name}, լեդ, լույսեր, խանութ",
+            "OG_TITLE": "{name} — {site}",
+            "OG_DESCRIPTION": "Ապրանքներ {name} կատեգորիայում։",
+            "TWITTER_TITLE": "{name}"
+        }
+    }
+}

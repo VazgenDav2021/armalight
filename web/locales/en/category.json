@@ -1,0 +1,12 @@
+{
+    "category": {
+        "metadata": {
+            "TITLE": "{name} | ArmLight",
+            "DESCRIPTION": "Find {name} products in our store.",
+            "KEYWORDS": "{name}, led, lights, shop",
+            "OG_TITLE": "{name} — {site}",
+            "OG_DESCRIPTION": "Products in the {name} category.",
+            "TWITTER_TITLE": "{name}"
+        }
+    }
+}

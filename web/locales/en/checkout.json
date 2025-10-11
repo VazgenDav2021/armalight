@@ -1,0 +1,37 @@
+{
+    "checkout": {
+        "metadata": {
+            "TITLE": "Armlight | Checkout",
+            "DESCRIPTION": "Fill in your shipping and payment details to complete your order.",
+            "KEYWORDS": "Armlight, checkout, payment, shipping, cart, order",
+            "OG_TITLE": "Armlight | Checkout Page",
+            "OG_DESCRIPTION": "Complete your purchase by entering shipping address and payment details.",
+            "TWITTER_TITLE": "Armlight | Checkout",
+            "TWITTER_DESCRIPTION": "Final step — confirm your details and place the order."
+        },
+        "SHIPPING": {
+            "TITLE": "Shipping Address",
+            "NAME": "First Name",
+            "SNAME": "Last Name",
+            "PHONE": "Phone",
+            "CITY": "City",
+            "ADDRESS": "Address",
+            "POST": "Postal Code",
+            "SUBMIT": "Submit"
+        },
+        "BILLING": {
+            "TITLE": "Payment Method",
+            "CARD_NUMBER": "Card Number",
+            "NAME_SNAME": "Cardholder Name",
+            "EXP_DATE": "Expiration Date",
+            "CODE": "CVV/CVC"
+        },
+        "SUMARY": {
+            "TITLE": "Cart",
+            "ITEMS": "Items",
+            "DELIVER": "Delivery Fee",
+            "ALL_IN_ALL": "Total",
+            "CHECKOUT": "Proceed to Checkout"
+        }
+    }
+}

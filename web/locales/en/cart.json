@@ -1,0 +1,21 @@
+{
+    "cart": {
+        "metadata": {
+            "TITLE": "Armlight | Cart",
+            "DESCRIPTION": "View the items in your cart and proceed to checkout easily and quickly.",
+            "KEYWORDS": "Armlight, cart, shopping, order, delivery",
+            "OG_TITLE": "Armlight | Your Cart",
+            "OG_DESCRIPTION": "Check the contents of your cart and get ready to complete your order with Armlight.",
+            "TWITTER_TITLE": "Armlight | Cart",
+            "TWITTER_DESCRIPTION": "Manage your cart and complete your order in one step."
+        },
+        "TITLE": "Your Cart",
+        "SUMARY": {
+            "TITLE": "Cart",
+            "ITEMS": "Items",
+            "DELIVER": "Delivery fee",
+            "ALL_IN_ALL": "Total",
+            "CHECKOUT": "Proceed to Checkout"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "signIn": {
+        "metadata": {
+            "TITLE": "Sign In",
+            "DESCRIPTION": "Access your account using email and password"
+        },
+        "title": "Sign In",
+        "mail": "Email",
+        "password": "Password",
+        "forgetPassword": "Forgot password?",
+        "enter": "Login",
+        "dontHaveAccount": "Don't have an account?" ,
+        "register": "Register",
+        "invalidCredentials": "Email or password is incorrect"
+    }
+}

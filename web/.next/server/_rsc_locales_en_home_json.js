@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "_rsc_locales_en_home_json";
+exports.ids = ["_rsc_locales_en_home_json"];
+exports.modules = {
+
+/***/ "(rsc)/./locales/en/home.json":
+/*!******************************!*\
+  !*** ./locales/en/home.json ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = JSON.parse('{"home":{"metadata":{"TITLE":"Armlight | Official Website – Innovation in Lighting","DESCRIPTION":"Join Armlight – your trusted partner for modern lighting solutions.","KEYWORDS":"Armlight, lighting, LED lights, energy saving, lighting systems","OG_TITLE":"Armlight | High-Quality Lighting Services","OG_DESCRIPTION":"We provide high-quality and innovative lighting solutions that combine energy efficiency and durability.","TWITTER_TITLE":"Armlight | Lighting and Innovation","TWITTER_DESCRIPTION":"Armlight – your trusted partner for modern lighting solutions."},"hero":{"TITLE":"ARMLIGHT","TEXT":"Your bright partner","BUTTONS":[{"TEXT":"View Products","BACKGROUND":"#fff","URL":"/catalog"},{"TEXT":"About Us","BACKGROUND":"transparent","URL":"/about"}]},"advantages":{"TITLE":"Our Advantages","CHILDREN":[{"LOGO":"/home/icons/energy.svg","TITLE":"Energy-Saving Solutions","TEXT":"We offer modern lighting systems that combine efficiency, durability, and energy saving."},{"LOGO":"/home/icons/document.svg","TITLE":"High Quality and Reliability","TEXT":"All Armlight products undergo strict quality control to ensure long-lasting and reliable performance."},{"LOGO":"/home/icons/setting.svg","TITLE":"Support and Service","TEXT":"We provide professional consulting and technical support to ensure the success of your project."}]},"bestSellerTitle":"Best Sellers","ourPartnersTitle":"Our Partners","QA":{"TITLE":"Frequently Asked Questions","TEXT":"If you can’t find the answer to your question — contact us and we’ll be happy to help.","BUTTON":{"TITLE":"Contact","URL":"/contact"},"CHILDREN":[{"TITLE":"What are your main products?","TEXT":"We offer LED lights, lighting systems, and energy-saving solutions for both homes and businesses."},{"TITLE":"Do you provide installation services?","TEXT":"Yes, our specialists can help with installation and setup of lighting systems."},{"TITLE":"What is the warranty period for your products?","TEXT":"All Armlight products come with an official warranty of at least 2 years."},{"TITLE":"Do you have wholesale offers?","TEXT":"Yes, we provide wholesale cooperation with special terms and discounts."},{"TITLE":"Where is your company located?","TEXT":"Our head office is located in Yerevan, and deliveries are made throughout Armenia."}]},"ledLamps":{"title":"LED Lamps","text":"LED lamps are energy-efficient and long-lasting lighting solutions","knowMore":"Learn more"}}}');
+
+/***/ })
+
+};
+;
