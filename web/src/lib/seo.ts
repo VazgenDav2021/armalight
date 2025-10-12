@@ -34,11 +34,6 @@ export function makeGenerateMetadata(opts: MetaFactoryOptions) {
     const ns = `${namespace}.metadata`;
     const title = t(`${ns}.TITLE`);
     const description = t(`${ns}.DESCRIPTION`);
-    const keywords = t(`${ns}.KEYWORDS`).split(',').map((k: string) => k.trim());
-    const ogTitle = t(`${ns}.OG_TITLE`);
-    const ogDescription = t(`${ns}.OG_DESCRIPTION`);
-    const twitterTitle = t(`${ns}.TWITTER_TITLE`);
-
     const currentBase = baseUrlPerLocale?.[locale] ?? baseUrl;
     const canonical = `${currentBase}${routePath}`;
 
@@ -52,31 +47,24 @@ export function makeGenerateMetadata(opts: MetaFactoryOptions) {
     return {
       title,
       description,
-      keywords,
       alternates: {
         canonical,
         languages: alternatesLanguages,
       },
-      openGraph: {
-        title: ogTitle,
-        description: ogDescription,
-        url: canonical,
-        siteName,
-        type: 'website',
-        images: [
-          {
-            url: `${currentBase}${imagePath}`,
-            width: 1200,
-            height: 630,
-            alt: ogTitle,
-          },
-        ],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: twitterTitle,
-        images: [`${currentBase}${imagePath}`],
-      },
+      // openGraph: {
+      //   title: ogTitle,
+      //   url: canonical,
+      //   siteName,
+      //   type: 'website',
+      //   images: [
+      //     {
+      //       url: `${currentBase}${imagePath}`,
+      //       width: 1200,
+      //       height: 630,
+      //       alt: ogTitle,
+      //     },
+      //   ],
+      // },
     };
   };
 }

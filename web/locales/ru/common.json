@@ -35,7 +35,8 @@
                     "type": "link",
                     "url": "/contact"
                 }
-            ]
+            ],
+            "greeting": "Привет"
         },
         "loginButton": {
             "title": "Войти",

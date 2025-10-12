@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const cardSchema = new mongoose.Schema(
+// Схема для платежной информации
+const paymentSchema = new mongoose.Schema(
   {
     cardNumber: { type: String, required: true },
     expDate: { type: String, required: true },
@@ -10,17 +11,32 @@ const cardSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const userSchema = new mongoose.Schema(
+// Схема для истории заказов
+const orderSchema = new mongoose.Schema(
+  {
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "GuestOrder" }],
+  },
+  { _id: false }
+);
+
+// Схема для персональных данных
+const personalDataSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String },
     email: { type: String, unique: true, sparse: true },
     phone: { type: String, unique: true, sparse: true },
-    address: { type: String, unique: true, sparse: true },
+    address: { type: String },
+  },
+  { _id: false }
+);
+
+const userSchema = new mongoose.Schema(
+  {
+    personalData: personalDataSchema,
+    orders: orderSchema,
+    payment: paymentSchema,
     password: { type: String, required: true },
-    orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "GuestOrder" }],
-    card: cardSchema,
-    isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
     resetToken: { type: String },
     resetTokenExp: { type: Date },

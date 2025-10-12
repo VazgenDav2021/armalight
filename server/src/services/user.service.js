@@ -5,45 +5,43 @@ import { emailService } from "./email.service.js";
 export const userService = {
   async register(data) {
     const code = crypto.randomInt(100000, 999999).toString();
+
     const user = await User.create({
-      ...data,
+      personalData: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+      },
+      password: data.password,
       verificationCode: code,
-      isVerified: false,
+      orders: [],
+      payment: data.payment,
     });
-
-    await emailService.sendVerificationEmail(user.email, code);
-
     return user;
   },
 
   async findByEmail(email) {
-    return User.findOne({ email });
+    return User.findOne({ "personalData.email": email });
   },
 
   async findById(id) {
     return User.findById(id);
   },
 
-  async verifyEmail(email, code) {
-    const user = await User.findOne({ email });
-    if (!user || user.verificationCode !== code) return null;
-    user.isVerified = true;
-    user.verificationCode = null;
-    await user.save();
-    return user;
-  },
-
   async forgotPassword(email) {
-    1;
     const token = crypto.randomBytes(32).toString("hex");
     const user = await User.findOneAndUpdate(
-      { email },
+      { "personalData.email": email },
       { resetToken: token, resetTokenExp: Date.now() + 1000 * 60 * 15 },
       { new: true }
     );
+
     if (user) {
-      await emailService.sendPasswordResetEmail(user.email, token);
+      await emailService.sendPasswordResetEmail(email, token);
     }
+
     return user;
   },
 
@@ -53,6 +51,7 @@ export const userService = {
       resetTokenExp: { $gt: new Date() },
     });
     if (!user) return null;
+
     user.password = newPassword;
     user.resetToken = null;
     user.resetTokenExp = null;
@@ -70,7 +69,9 @@ export const userService = {
     const updateData = {};
 
     for (const key of allowedFields) {
-      if (data[key] !== undefined) updateData[key] = data[key];
+      if (data[key] !== undefined) {
+        updateData[`personalData.${key}`] = data[key];
+      }
     }
 
     const user = await User.findByIdAndUpdate(userId, updateData, {

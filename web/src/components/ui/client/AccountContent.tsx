@@ -27,10 +27,10 @@ export default function AccountContent({ user }: AccountContentProps) {
 
   switch (active) {
     case "personal":
-      return <PersonalData user={user} />;
+      return <PersonalData personalData={user?.personalData!} />;
     case "orders":
-      return <OrderHistory user={user} />;
+      return <OrderHistory orders={user?.orders!} />;
     default:
-      return <BankCards />;
+      return <BankCards payment={user?.payment} />;
   }
 }

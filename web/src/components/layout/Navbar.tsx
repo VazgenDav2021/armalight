@@ -9,7 +9,6 @@ import { useTranslations, useLocale } from "next-intl";
 import LogoIcon from "@/icons/LogoIcon";
 import AvatarIcon from "@/icons/AvatarIcon";
 import BurgerIcon from "@/icons/BurgerIcon";
-import { authService } from "@/services/authService";
 
 export default function Navbar() {
   const t = useTranslations("common");
@@ -21,6 +20,7 @@ export default function Navbar() {
     url?: string;
     children?: { title: string; url: string }[];
   }[];
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -49,9 +49,11 @@ export default function Navbar() {
               )
             )}
             <LanguageSwitcher />
+
             <CartIcon />
+
             <a className="px-3 py-2 border rounded" href={`/${locale}/sign-in`}>
-              {t("loginButton.title", { default: "Account" })}
+              {t("loginButton.title", { default: "Login" })}
             </a>
           </nav>
         </div>
@@ -82,6 +84,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
       {menuOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 md:hidden">
           <div className="absolute top-0 right-0 w-64 h-full bg-white shadow-lg p-6 flex flex-col gap-4">

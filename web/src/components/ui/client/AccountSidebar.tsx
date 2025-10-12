@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { redirect } from "@/navigation";
+import { useRouter } from "next/navigation";
+import { authService } from "@/services/authService"; // 👈 импорт сервиса
 
 export default function AccountSidebar() {
   const [active, setActive] = useState("personal");
   const t = useTranslations("account");
+  const router = useRouter();
 
   const menuItems = t.raw("MENU_ITEMS") as { id: string; label: string }[];
 
@@ -21,10 +23,14 @@ export default function AccountSidebar() {
     window.dispatchEvent(new Event("account-tab-change"));
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("activeTab");
-    document.cookie = "token=; Max-Age=0; path=/;";
-    redirect("/sign-in")
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      localStorage.removeItem("activeTab");
+      router.push("/");
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
   };
 
   return (

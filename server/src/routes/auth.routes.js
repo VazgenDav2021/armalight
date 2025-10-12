@@ -17,8 +17,8 @@ router.post(
   validate(registerSchema),
   authController.register
 );
-router.post("/auth/verify", validate(verifySchema), authController.verify);
 router.post("/auth/login", validate(loginSchema), authController.login);
+router.post("/auth/logout", authController.logout);
 router.put(
   "/auth/me",
   validate(updateProfileSchema),

@@ -2,6 +2,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Locale } from "@/navigation";
 import { ProductLocale } from "@/services/productService";
+import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
 
 const CartControls = dynamic(() => import("./CartControls"), { ssr: false });
 
@@ -42,7 +43,9 @@ export default function ProductDetails({ product }: { product: ProductLocale<Loc
           <span className="px-2 py-1 text-xs bg-gray-100 rounded w-fit cursor-pointer">
             {product.code}
           </span>
-          <div className="text-2xl font-bold text-brand">${product.price}</div>
+          <div className="text-2xl font-bold text-brand">
+            {formatPriceAMD(product.price)}
+          </div>
 
           <div className="bg-white shadow p-4 rounded space-y-2 flex-1">
             {Object.entries(product.technical || {}).map(([key, value]) => (

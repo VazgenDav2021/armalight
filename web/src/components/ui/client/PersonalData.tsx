@@ -1,36 +1,57 @@
 "use client";
 
-import { useState } from "react";
-import { User } from "@/lib/types";
+import { useState, useEffect } from "react";
+import { PersonalData as PersonalDataType } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { authService, UpdateProfileData } from "@/services/authService";
 
 interface IPersonalDataProps {
-  user: User | null;
+  personalData: PersonalDataType | null;
 }
 
-export default function PersonalData({ user }: IPersonalDataProps) {
+export default function PersonalData({ personalData }: IPersonalDataProps) {
   const t = useTranslations("account.PERSONAL_DATA");
 
-  // Локальное состояние формы
   const [formData, setFormData] = useState<UpdateProfileData>({
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    address: user?.address || "",
-    city: user?.city || "",
+    firstName: personalData?.firstName || "",
+    lastName: personalData?.lastName || "",
+    email: personalData?.email || "",
+    phone: personalData?.phone || "",
+    address: personalData?.address || "",
+    city: personalData?.city || "",
   });
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [isChanged, setIsChanged] = useState(false);
+
+  useEffect(() => {
+    // Проверяем, изменились ли данные
+    const changed =
+      formData.firstName !== (personalData?.firstName || "") ||
+      formData.lastName !== (personalData?.lastName || "") ||
+      formData.email !== (personalData?.email || "") ||
+      formData.phone !== (personalData?.phone || "") ||
+      formData.address !== (personalData?.address || "") ||
+      formData.city !== (personalData?.city || "");
+    setIsChanged(changed);
+  }, [formData, personalData]);
 
   const onChange = (field: keyof UpdateProfileData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const onCancel = () => {
-    if (typeof window !== "undefined") window.history.back();
+    if (!isChanged) return;
+    setFormData({
+      firstName: personalData?.firstName || "",
+      lastName: personalData?.lastName || "",
+      email: personalData?.email || "",
+      phone: personalData?.phone || "",
+      address: personalData?.address || "",
+      city: personalData?.city || "",
+    });
+    setMessage(null);
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -41,7 +62,6 @@ export default function PersonalData({ user }: IPersonalDataProps) {
     try {
       const updatedUser = await authService.updateProfile(formData);
       setMessage("Данные успешно обновлены!");
-      // Можно обновить состояние родителя, если нужно
       console.log("Updated user:", updatedUser);
     } catch (err: any) {
       setMessage(err.message || "Ошибка при обновлении данных");
@@ -124,20 +144,21 @@ export default function PersonalData({ user }: IPersonalDataProps) {
           />
         </div>
 
-        {message && <p className="text-sm text-green-600">{message}</p>}
-
         <div className="flex gap-2 pt-2">
           <button
             type="button"
             onClick={onCancel}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 text-[#565656] hover:bg-gray-50 text-sm font-medium transition">
+            disabled={!isChanged}
+            className={`w-full px-4 py-2 rounded-md border border-gray-300 text-[#565656] text-sm font-medium transition ${
+              !isChanged ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
+            }`}>
             {t("cancel")}
           </button>
           <button
+            disabled={loading || !isChanged}
             type="submit"
-            disabled={loading}
-            className="w-full px-4 py-2 rounded-md bg-brand text-white text-sm font-medium hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 transition">
-            {loading ? "Сохраняем..." : t("save")}
+            className="w-full px-4 py-2 rounded-md bg-brand text-white text-sm font-medium hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2 transition disabled:opacity-70">
+            {t("save")}
           </button>
         </div>
       </form>

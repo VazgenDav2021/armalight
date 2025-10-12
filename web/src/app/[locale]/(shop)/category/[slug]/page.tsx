@@ -1,6 +1,5 @@
 import SearchResult from "@/components/ui/client/SearchResult";
 import CategoryHeader from "@/components/ui/client/CategoryHeader";
-import { getCategoryBySlug } from "@/lib/api/mock"; // оставим только категорию
 import { getTranslations } from "next-intl/server";
 import { makeGenerateMetadata } from "@/lib/seo";
 import { productService } from "@/services/productService";
@@ -23,7 +22,7 @@ export async function generateMetadata({ params }: Props) {
     locales: ["hy", "en", "ru"],
   })({ params: { locale } });
 
-  const category = await getCategoryBySlug(slug);
+  const category = { name: "Example" };
 
   const t = await getTranslations({ locale, namespace: "category" });
   const name = category?.name ?? slug;
@@ -38,9 +37,6 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title: t("metadata.OG_TITLE", { name, site: "ArmLight" }),
       description: t("metadata.OG_DESCRIPTION", { name }),
-    },
-    twitter: {
-      title: t("metadata.TWITTER_TITLE", { name }),
     },
   };
 }
@@ -60,7 +56,7 @@ export default async function CategoryPage({
   const minPrice = searchParams?.min ? Number(searchParams.min) : undefined;
   const maxPrice = searchParams?.max ? Number(searchParams.max) : undefined;
 
-  const category = await getCategoryBySlug(params.slug);
+  const category = { name: "Example" };
 
   const products = await productService.getProductsByCategory({
     slug: params.slug,

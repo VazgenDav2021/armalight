@@ -35,7 +35,8 @@
                     "type": "link",
                     "url": "/contact"
                 }
-            ]
+            ],
+            "greeting": "Hello"
         },
         "loginButton": {
             "title": "Sign In",

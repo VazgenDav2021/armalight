@@ -26,7 +26,6 @@ export interface ResetPasswordData {
   password: string;
 }
 
-// Для обновления профиля
 export interface UpdateProfileData {
   firstName?: string;
   lastName?: string;
@@ -48,7 +47,12 @@ export const authService = {
   },
 
   async login(data: LoginData) {
-    const res = await api.post("/auth/login", data);
+    const res = await api.post("/auth/login", data, { withCredentials: true });
+    return res.data;
+  },
+
+  async logout() {
+    const res = await api.post("/auth/logout", {}, { withCredentials: true });
     return res.data;
   },
 
@@ -63,12 +67,12 @@ export const authService = {
   },
 
   async getMe() {
-    const res = await api.get("/auth/me");
+    const res = await api.get("/auth/me", { withCredentials: true });
     return res.data;
   },
 
   async updateProfile(data: UpdateProfileData) {
-    const res = await api.put("/auth/me", data);
+    const res = await api.put("/auth/me", data, { withCredentials: true });
     return res.data;
   },
 };

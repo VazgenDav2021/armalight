@@ -6,6 +6,10 @@ export const authController = {
   async register(req, res) {
     try {
       const user = await userService.register(req.body);
+      const token = jwt.sign({ id: user._id }, env.JWT_SECRET, {
+        expiresIn: "7d",
+      });
+      res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
       res.status(201).json({
         message:
           "User registered successfully. Check your email for the verification code.",
@@ -16,26 +20,32 @@ export const authController = {
     }
   },
 
-  async verify(req, res) {
-    const { email, code } = req.body;
-    const user = await userService.verifyEmail(email, code);
-    if (!user) return res.status(400).json({ error: "Invalid code" });
-    res.json({ message: "Account verified successfully" });
-  },
-
   async login(req, res) {
     const { email, password } = req.body;
     const user = await userService.findByEmail(email);
     if (!user || !(await user.comparePassword(password)))
       return res.status(401).json({ error: "Invalid credentials" });
-    if (!user.isVerified)
-      return res.status(403).json({ error: "Email not verified" });
 
     const token = jwt.sign({ id: user._id }, env.JWT_SECRET, {
       expiresIn: "7d",
     });
     res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
     res.json({ message: "Logged in successfully" });
+  },
+
+  async logout(req, res) {
+    try {
+      res.cookie("token", "", {
+        httpOnly: true,
+        sameSite: "lax",
+        expires: new Date(0),
+        path: "/",
+      });
+      res.json({ message: "Logged out successfully" });
+    } catch (err) {
+      console.error("Logout error:", err);
+      res.status(500).json({ error: "Logout failed" });
+    }
   },
 
   async forgotPassword(req, res) {

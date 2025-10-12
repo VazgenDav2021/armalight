@@ -47,17 +47,14 @@ const messages: Record<Locale, Record<ErrorCode, string>> = {
   },
 };
 
-// Возвращаем локализованное сообщение
 export function getErrorMessage(code: ErrorCode | string, locale: Locale) {
   const str = String(code).trim();
-  // Находим канонический код без учёта регистра ("Required" -> "required")
   const canonical = (ALL_CODES as readonly string[]).find(
     (c) => c.toLowerCase() === str.toLowerCase()
   );
   if (canonical) {
     return messages[locale][canonical as ErrorCode];
   }
-  // Фолбэк: вернуть как есть
   return str;
 }
 

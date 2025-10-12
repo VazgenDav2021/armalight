@@ -1,18 +1,15 @@
-// app/[locale]/components/ui/CategorySection.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 export default async function CategorySection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "common.navigation" });
-
-  // Вытаскиваем массив "children" → первый элемент (Аպրանքներ) → его children
   const root = t.raw("children")[0] as {
     title: string;
     children: { title: string; url: string }[];
   };
 
-  const title = root.title; // "Ապրանքներ"
+  const title = root.title;
   const categories = root.children;
 
   return (

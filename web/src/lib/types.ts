@@ -1,21 +1,40 @@
-// Основной тип User для сервера/клиента
-export type User = {
-  _id: string;
+export type Payment = {
+  cardNumber: string;
+  expDate: string;
+  holderName: string;
+};
+
+export type OrderRef = {
+  id: string;
+  total: number;
+  createdAt?: string;
+  items: {
+    productId: string;
+    qty: number;
+    price: number;
+  }[];
+}[];
+
+export type PersonalData = {
   firstName: string;
   lastName?: string;
   email?: string;
-  password: string;
-  orderHistory?: Order[];
-  card?: Card;
-  isVerified: boolean;
-  verificationCode?: string;
-  resetToken?: string;
-  resetTokenExp?: string;
-  createdAt?: string;
-  updatedAt?: string;
   phone?: string;
   address?: string;
   city?: string;
+};
+
+export type User = {
+  _id: string;
+  personalData: PersonalData;
+  orders?: OrderRef;
+  payment?: Payment;
+  password: string;
+  verificationCode?: string | null;
+  resetToken?: string | null;
+  resetTokenExp?: string | Date | null;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 // Карта пользователя
@@ -24,15 +43,6 @@ export type Card = {
   expDate: string;
   holderName: string;
 };
-
-// Для клиента: только нужные поля для PersonalData
-export type UserPersonal = Pick<User, "firstName" | "lastName" | "email" | "phone" | "address" | "city">;
-
-// Для клиента: только email для OrderHistory
-export type UserOrders = Pick<User, "email">;
-
-// Для клиента: только карта для BankCards
-export type UserCard = Pick<User, "card">;
 
 export type Category = {
   id: string;
@@ -51,7 +61,7 @@ export type Product = {
   technical?: Record<string, string | number>;
   attributes?: Record<string, string | number>;
   categoryId: string;
-  isBestSeller:boolean;
+  isBestSeller: boolean;
 };
 
 export type Order = {

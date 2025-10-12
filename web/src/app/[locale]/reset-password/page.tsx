@@ -40,7 +40,7 @@ const ResetPasswordPage = () => {
       toast.error(t("error"));
     } finally {
       setLoading(false);
-      redirect("/account")
+      router.push("/account")
     }
   };
 

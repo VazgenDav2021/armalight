@@ -1,8 +1,13 @@
 "use client";
 
+import { Payment } from "@/lib/types";
 import Image from "next/image";
 
-export default function BankCards() {
+interface BankCardsProps {
+  payment: Payment | undefined;
+}
+
+export default function BankCards({ payment }: BankCardsProps) {
   return (
     <section className="w-full">
       <h2 className="text-[24px] leading-[150%] font-normal text-[#565656] mb-6">

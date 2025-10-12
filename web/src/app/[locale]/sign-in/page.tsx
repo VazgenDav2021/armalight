@@ -31,14 +31,13 @@ export default function SignInPage() {
     try {
       setLoading(true);
       await authService.login({ email, password });
-      router.push("/");
+      router.push("/account");
     } catch (err: any) {
       setError(t("invalidCredentials"));
     } finally {
       setLoading(false);
       if (emailRef.current) emailRef.current.value = "";
       if (passwordRef.current) passwordRef.current.value = "";
-      router.push("/account");
     }
   };
 
@@ -109,15 +108,16 @@ export default function SignInPage() {
             className="mt-8 w-full rounded-md bg-brand py-3 text-white text-base font-medium hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2">
             {t("enter")}
           </button>
-
-          <p className="mt-8 text-center text-sm font-normal text-[#565656]">
-            {t("dontHaveAccount")}
+          <div className="flex mt-8 items-center justify-center gap-1">
+            <p className="text-center text-sm font-normal text-[#565656]">
+              {t("dontHaveAccount")}
+            </p>
             <a
               href="/register"
               className="font-medium text-brand hover:underline">
               {t("register")}
             </a>
-          </p>
+          </div>
         </form>
       </div>
     </div>

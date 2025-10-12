@@ -1,4 +1,3 @@
-import WelcomeSection from "@/components/ui/client/WelcomeSection";
 import AccountSidebar from "@/components/ui/client/AccountSidebar";
 import AccountContent from "@/components/ui/client/AccountContent";
 import { makeGenerateMetadata } from "@/lib/seo";

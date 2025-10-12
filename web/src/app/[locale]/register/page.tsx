@@ -39,7 +39,7 @@ export default function RegisterPage() {
         email,
         password,
       });
-      router.push("/sign-in");
+      router.push("/account");
     } catch (err: any) {
       setError(err.message || t("registrationFailed") || "Registration failed");
     } finally {
@@ -151,7 +151,7 @@ export default function RegisterPage() {
             type="submit"
             disabled={loading}
             className="mt-8 w-full rounded-md bg-brand py-3 text-white text-base font-medium hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2">
-            {loading ? t("loading") || "..." : t("register")}
+           {t("register")}
           </button>
 
           <p className="mt-8 text-center text-sm font-normal text-[#565656]">
