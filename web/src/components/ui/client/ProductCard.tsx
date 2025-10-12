@@ -1,4 +1,5 @@
 "use client";
+import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
 import { useCart } from "@/lib/cart/store";
 import { Locale } from "@/navigation";
 import { ProductLocale } from "@/services/productService";
@@ -23,7 +24,7 @@ export default function ProductCard({ product }: { product: ProductLocale<Locale
         <div className="text-sm text-gray-600 line-clamp-2">
           {product.shortDetails}
         </div>
-        <div className="font-semibold">${product.price.toFixed(2)}</div>
+        <div className="font-semibold">{formatPriceAMD(product.price)}</div>
       </div>
 
       <div className="p-3 pt-0">

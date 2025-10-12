@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SearchBar() {
   const t = useTranslations("common");
@@ -12,22 +12,32 @@ export default function SearchBar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [q, setQ] = useState(searchParams.get("q") || "");
+  const initialQ = searchParams.get("q") || "";
+  const [q, setQ] = useState(initialQ);
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const params = new URLSearchParams(searchParams.toString());
-    if (q) {
-      params.set("q", q);
-    } else {
-      params.delete("q");
-    }
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`);
-  };
+  useEffect(() => {
+    setQ(initialQ);
+  }, [initialQ]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (q) {
+        params.set("q", q);
+      } else {
+        params.delete("q");
+      }
+
+      params.set("page", "1");
+      router.replace(`${pathname}?${params.toString()}`);
+    }, 400);
+
+    return () => clearTimeout(timeout);
+  }, [q, pathname, router, searchParams]);
 
   return (
-    <form onSubmit={submit} className="flex-1 w-full">
+    <form onSubmit={(e) => e.preventDefault()} className="flex-1 w-full">
       <input
         className="w-full border rounded px-3 py-2 bg-brand-gray md:max-w-[308px]"
         placeholder={searchTitle}

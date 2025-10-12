@@ -2,6 +2,7 @@ import { ProductLocale } from "@/services/productService";
 import ProductCard from "./ProductCard";
 import Skeleton from "./Skeleton";
 import { Locale } from "@/navigation";
+import Pagination from "./Pagination";
 
 export default function SearchResult({
   products,
@@ -42,23 +43,8 @@ export default function SearchResult({
           <ProductCard key={p._id} product={p} />
         ))}
       </div>
-      {pagination && (
-        <div className="flex items-center justify-center gap-2">
-          {Array.from(
-            { length: Math.ceil(pagination.total / pagination.pageSize) },
-            (_, i) => i + 1
-          ).map((n) => (
-            <a
-              key={n}
-              className={`px-3 py-1 border rounded ${
-                n === pagination.page ? "bg-gray-100" : ""
-              }`}
-              href={`${pagination.basePath}?page=${n}`}>
-              {n}
-            </a>
-          ))}
-        </div>
-      )}
+
+      {pagination && <Pagination {...pagination} />}
     </div>
   );
 }

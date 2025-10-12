@@ -1,8 +1,7 @@
-export const formatPriceAMD = (value: number) => {
-  return new Intl.NumberFormat("hy-AM", {
-    style: "currency",
-    currency: "AMD",
+export function formatPriceAMD(value: number): string {
+  const formatted = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(value);
-};
+  return `${formatted} ֏`;
+}

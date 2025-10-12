@@ -2,8 +2,9 @@
 
 import { useState, Fragment } from "react";
 import { useTranslations } from "next-intl";
-import { Order, OrderRef } from "@/lib/types";
+import { OrderRef } from "@/lib/types";
 import clsx from "clsx";
+import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
 
 export default function OrderTable({ orders }: { orders: OrderRef }) {
   const t = useTranslations("account.ORDERS");
@@ -17,14 +18,12 @@ export default function OrderTable({ orders }: { orders: OrderRef }) {
 
   return (
     <div className="mt-6 overflow-hidden">
-      {/* Заголовок вне таблицы */}
       <div className="grid grid-cols-3 bg-[#F3F3F3] text-[#565656] rounded-t-lg">
         <div className="px-4 py-6">{t("orderNumber")}</div>
         <div className="px-4 py-6 text-center">{t("date")}</div>
         <div className="px-4 py-6 text-right">{t("price")}</div>
       </div>
 
-      {/* Контейнер со скроллом */}
       <div className="max-h-[400px] overflow-y-auto">
         <table className="w-full text-left text-[#565656] border-separate border-spacing-y-4">
           <tbody>
@@ -32,7 +31,6 @@ export default function OrderTable({ orders }: { orders: OrderRef }) {
               const isOpen = openRows.includes(order.id);
               return (
                 <Fragment key={order.id}>
-                  {/* Основная строка */}
                   <tr
                     className={clsx(
                       "cursor-pointer transition rounded-lg shadow-sm",
@@ -44,11 +42,10 @@ export default function OrderTable({ orders }: { orders: OrderRef }) {
                     <td className="px-4 py-6 rounded-l-lg">{order.id}</td>
                     <td className="px-4 py-6 text-center">{order.createdAt}</td>
                     <td className="px-4 py-6 text-right rounded-r-lg">
-                      {order.total} ֏
+                      {formatPriceAMD(order.total)}
                     </td>
                   </tr>
 
-                  {/* Детали заказа */}
                   {isOpen && (
                     <tr>
                       <td
@@ -76,7 +73,7 @@ export default function OrderTable({ orders }: { orders: OrderRef }) {
                                   {item.qty}
                                 </td>
                                 <td className="py-2 pr-2 text-right">
-                                  {item.price} ֏
+                                  {formatPriceAMD(item.price)}
                                 </td>
                               </tr>
                             ))}
