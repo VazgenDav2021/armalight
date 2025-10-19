@@ -3,6 +3,8 @@ import AccountContent from "@/components/ui/client/AccountContent";
 import { makeGenerateMetadata } from "@/lib/seo";
 import { cookies } from "next/headers";
 import { User } from "@/lib/types";
+import Navbar from "@/components/layout/Navbar";
+import { Locale } from "@/navigation";
 
 export const generateMetadata = makeGenerateMetadata({
   namespace: "account",
@@ -34,15 +36,22 @@ async function getMeServer(): Promise<User | null> {
   }
 }
 
-export default async function AccountPage() {
+export default async function AccountPageHome({
+  params: { locale },
+}: {
+  params: { locale: Locale };
+}) {
   const user: User | null = await getMeServer();
 
   return (
-    <section className="flex flex-col direct min-h-screen py-10">
-      <div className="flex gap-32">
-        <AccountSidebar />
-        <AccountContent user={user} />
-      </div>
-    </section>
+    <>
+      <Navbar locale={locale} />
+      <section className="flex flex-col direct min-h-screen py-10">
+        <div className="flex gap-32">
+          <AccountSidebar />
+          <AccountContent user={user} />
+        </div>
+      </section>
+    </>
   );
 }

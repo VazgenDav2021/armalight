@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 // Схема для платежной информации
 const paymentSchema = new mongoose.Schema(
   {
-    cardNumber: { type: String, required: true },
-    expDate: { type: String, required: true },
-    holderName: { type: String, required: true },
+    cardNumber: { type: String },
+    expDate: { type: String },
+    holderName: { type: String },
   },
   { _id: false }
 );
@@ -34,12 +34,13 @@ const personalDataSchema = new mongoose.Schema(
 const userSchema = new mongoose.Schema(
   {
     personalData: personalDataSchema,
-    orders: orderSchema,
+    orders: [orderSchema],
     payment: paymentSchema,
     password: { type: String, required: true },
     verificationCode: { type: String },
     resetToken: { type: String },
     resetTokenExp: { type: Date },
+    discount: { type: Number },
   },
   { timestamps: true }
 );

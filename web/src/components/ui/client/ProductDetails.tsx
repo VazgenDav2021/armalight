@@ -44,7 +44,7 @@ export default function ProductDetails({ product }: { product: ProductLocale<Loc
             {product.code}
           </span>
           <div className="text-2xl font-bold text-brand">
-            {formatPriceAMD(product.price)}
+            {formatPriceAMD(product.priceWithDiscount)}
           </div>
 
           <div className="bg-white shadow p-4 rounded space-y-2 flex-1">

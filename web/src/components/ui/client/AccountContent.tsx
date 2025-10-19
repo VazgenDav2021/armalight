@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import PersonalData from "./PersonalData";
 import OrderHistory from "./OrderHistory";
-import BankCards from "./BankCards";
 import { User } from "@/lib/types";
 
 interface AccountContentProps {
@@ -27,10 +26,8 @@ export default function AccountContent({ user }: AccountContentProps) {
 
   switch (active) {
     case "personal":
-      return <PersonalData personalData={user?.personalData!} />;
+      return <PersonalData personalData={user?.personalData!} discount={user?.discount} />;
     case "orders":
       return <OrderHistory orders={user?.orders!} />;
-    default:
-      return <BankCards payment={user?.payment} />;
   }
 }

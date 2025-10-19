@@ -23,7 +23,14 @@ export const productController = {
     try {
       const { id } = req.params;
       const { locale } = req.query;
-      const product = await productService.getProductById(id, locale);
+      const discountPercent = Number(req.cookies.discount) || 0;
+
+      const product = await productService.getProductById(
+        id,
+        locale,
+        discountPercent
+      );
+
       if (!product) {
         return res.status(404).json({ message: "Product not found" });
       }
@@ -66,7 +73,8 @@ export const productController = {
       const q = req.query.q || undefined;
       const minPrice = req.query.min ? Number(req.query.min) : undefined;
       const maxPrice = req.query.max ? Number(req.query.max) : undefined;
-      const locale = req.query.locale; // 'hy' | 'ru' | 'en' или undefined
+      const locale = req.query.locale;
+      const discountPercent = Number(req.cookies.discount) || 0;
 
       const result = await productService.getProductsByCategory({
         slug,
@@ -76,6 +84,7 @@ export const productController = {
         minPrice,
         maxPrice,
         locale,
+        discountPercent,
       });
 
       res.json(result);

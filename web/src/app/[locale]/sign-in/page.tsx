@@ -4,10 +4,12 @@ import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { authService } from "@/services/authService";
+import { useCart } from "@/lib/cart/store";
 
 export default function SignInPage() {
   const t = useTranslations("signIn");
   const router = useRouter();
+  const { setUser } = useCart();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -19,7 +21,6 @@ export default function SignInPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
     const email = emailRef.current?.value.trim() || "";
     const password = passwordRef.current?.value || "";
 
@@ -31,6 +32,9 @@ export default function SignInPage() {
     try {
       setLoading(true);
       await authService.login({ email, password });
+      const user = await authService.getMe();
+      setUser(user);
+
       router.push("/account");
     } catch (err: any) {
       setError(t("invalidCredentials"));
@@ -47,7 +51,6 @@ export default function SignInPage() {
         <h1 className="text-[24px] font-normal leading-[150%] text-[#565656]">
           {t("title")}
         </h1>
-
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div>
             <label
@@ -106,8 +109,9 @@ export default function SignInPage() {
             type="submit"
             disabled={loading}
             className="mt-8 w-full rounded-md bg-brand py-3 text-white text-base font-medium hover:bg-brand/90 focus:ring-2 focus:ring-brand focus:ring-offset-2">
-            {t("enter")}
+            {loading ? t("loading") : t("enter")}
           </button>
+
           <div className="flex mt-8 items-center justify-center gap-1">
             <p className="text-center text-sm font-normal text-[#565656]">
               {t("dontHaveAccount")}

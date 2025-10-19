@@ -1,7 +1,10 @@
+import Navbar from "@/components/layout/Navbar";
 import CartList from "@/components/ui/client/CartList";
 import CartSummary from "@/components/ui/client/CartSummary";
 import { makeGenerateMetadata } from "@/lib/seo";
+import { Locale } from "@/navigation";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 export const generateMetadata = makeGenerateMetadata({
   namespace: "cart",
@@ -12,19 +15,26 @@ export const generateMetadata = makeGenerateMetadata({
   locales: ["hy", "en", "ru"],
 });
 
-export default function CartPage() {
-  const t = useTranslations("cart");
+export default async function CartPage({
+  params: { locale },
+}: {
+  params: { locale: Locale };
+}) {
+  const t = await getTranslations({ locale, namespace: "cart" });
   return (
-    <section className="py-6 space-y-6">
-      <h1 className="text-2xl font-semibold text-[#565656]">{t("TITLE")}</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-          <CartList />
+    <>
+      <Navbar locale={locale} />
+      <section className="py-6 space-y-6">
+        <h1 className="text-2xl font-semibold text-[#565656]">{t("TITLE")}</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <CartList />
+          </div>
+          <div>
+            <CartSummary />
+          </div>
         </div>
-        <div>
-          <CartSummary />
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

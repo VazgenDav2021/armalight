@@ -2,12 +2,17 @@ import { Product } from "../models/Product.js";
 
 function localizeField(field, locale) {
   if (!field || typeof field !== "object") return field;
-  if (field[locale]) return field[locale]; // если это {hy, ru, en}
+  if (field[locale]) return field[locale];
   const localized = {};
   for (const key in field) {
     localized[key] = localizeField(field[key], locale);
   }
   return localized;
+}
+
+function applyDiscount(price, discountPercent) {
+  if (!discountPercent) return price;
+  return +(price * (1 - discountPercent / 100)).toFixed(2);
 }
 
 export const productService = {
@@ -20,21 +25,24 @@ export const productService = {
     return Product.find(filter);
   },
 
-  async getProductById(id, locale) {
+  async getProductById(id, locale, discountPercent) {
     const product = await Product.findById(id).lean();
     if (!product) return null;
 
-    if (locale) {
-      return {
-        ...product,
-        name: localizeField(product.name, locale),
-        description: localizeField(product.description, locale),
-        shortDetails: localizeField(product.shortDetails, locale),
-        technical: localizeField(product.technical, locale),
-      };
-    }
+    const localized = locale
+      ? {
+          ...product,
+          name: localizeField(product.name, locale),
+          description: localizeField(product.description, locale),
+          shortDetails: localizeField(product.shortDetails, locale),
+          technical: localizeField(product.technical, locale),
+        }
+      : product;
 
-    return product;
+    return {
+      ...localized,
+      priceWithDiscount: applyDiscount(product.price, discountPercent),
+    };
   },
 
   async updateProduct(id, data) {
@@ -45,6 +53,26 @@ export const productService = {
     return Product.findByIdAndDelete(id);
   },
 
+  async getProductById(id, locale, discountPercent) {
+    const product = await Product.findById(id).lean();
+    if (!product) return null;
+
+    const localized = locale
+      ? {
+          ...product,
+          name: localizeField(product.name, locale),
+          description: localizeField(product.description, locale),
+          shortDetails: localizeField(product.shortDetails, locale),
+          technical: localizeField(product.technical, locale),
+        }
+      : product;
+
+    return {
+      ...localized,
+      priceWithDiscount: applyDiscount(product.price, discountPercent),
+    };
+  },
+
   async getProductsByCategory({
     slug,
     page = 1,
@@ -53,6 +81,7 @@ export const productService = {
     minPrice,
     maxPrice,
     locale,
+    discountPercent=0,
   }) {
     const filter = { categoryId: slug };
     if (q && locale) filter[`name.${locale}`] = { $regex: q, $options: "i" };
@@ -68,8 +97,8 @@ export const productService = {
       .limit(pageSize)
       .lean();
 
-    const items = itemsRaw.map((p) =>
-      locale
+    const items = itemsRaw.map((p) => {
+      const localized = locale
         ? {
             ...p,
             name: localizeField(p.name, locale),
@@ -77,8 +106,13 @@ export const productService = {
             shortDetails: localizeField(p.shortDetails, locale),
             technical: localizeField(p.technical, locale),
           }
-        : p
-    );
+        : p;
+
+      return {
+        ...localized,
+        priceWithDiscount: applyDiscount(p.price, discountPercent),
+      };
+    });
 
     return { total, items };
   },
@@ -95,6 +129,7 @@ export const productService = {
             description: localizeField(p.description, locale),
             shortDetails: localizeField(p.shortDetails, locale),
             technical: localizeField(p.technical, locale),
+            priceWithDiscount: applyDiscount(p.price, 0),
           }
         : { ...p, id: p._id.toString() }
     );

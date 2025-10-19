@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { makeGenerateMetadata } from "@/lib/seo";
 import { productService } from "@/services/productService";
 import { Locale } from "@/navigation";
+import Navbar from "@/components/layout/Navbar";
 
 type Props = {
   params: { slug: string; locale: "hy" | "en" | "ru" };
@@ -42,15 +43,14 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function CategoryPage({
-  params,
+  params: { slug, locale },
   searchParams,
 }: {
-  params: { slug: string; locale: string };
+  params: { slug: string; locale: Locale };
   searchParams: { page?: string; q?: string; min?: string; max?: string };
 }) {
   const page = Number(searchParams?.page ?? 1);
   const pageSize = 12;
-  const { locale } = await params;
 
   const q = searchParams?.q || undefined;
   const minPrice = searchParams?.min ? Number(searchParams.min) : undefined;
@@ -59,7 +59,7 @@ export default async function CategoryPage({
   const category = { name: "Example" };
 
   const products = await productService.getProductsByCategory({
-    slug: params.slug,
+    slug: slug,
     page,
     pageSize,
     q,
@@ -73,8 +73,13 @@ export default async function CategoryPage({
     { title: category?.name || "Категория" },
   ];
 
+  products.items.map((el) => {
+    console.log({ el });
+  });
+
   return (
     <>
+      <Navbar locale={locale} />
       <CategoryHeader crumbs={crumbs} />
       <SearchResult
         products={products.items}
@@ -83,7 +88,7 @@ export default async function CategoryPage({
           page,
           pageSize,
           total: products.total,
-          basePath: `/${params.locale}/category/${params.slug}`,
+          basePath: `/${locale}/category/${slug}`,
         }}
       />
     </>

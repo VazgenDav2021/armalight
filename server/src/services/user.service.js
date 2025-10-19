@@ -4,8 +4,6 @@ import { emailService } from "./email.service.js";
 
 export const userService = {
   async register(data) {
-    const code = crypto.randomInt(100000, 999999).toString();
-
     const user = await User.create({
       personalData: {
         firstName: data.firstName,
@@ -15,9 +13,8 @@ export const userService = {
         address: data.address,
       },
       password: data.password,
-      verificationCode: code,
       orders: [],
-      payment: data.payment,
+      payment: {},
     });
     return user;
   },

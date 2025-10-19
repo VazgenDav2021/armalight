@@ -35,6 +35,7 @@ export type User = {
   resetTokenExp?: string | Date | null;
   createdAt?: string;
   updatedAt?: string;
+  discount?: number;
 };
 
 // Карта пользователя

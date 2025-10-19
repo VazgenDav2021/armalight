@@ -1,4 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -18,7 +17,6 @@ const RootLayout = async ({
     <html lang={params.locale}>
       <NextIntlClientProvider locale={params.locale} messages={messages}>
         <body>
-          <Navbar locale={params.locale} />
           <main className="container max-w-[1220px] pt-16">{children}</main>
           <Footer />
         </body>

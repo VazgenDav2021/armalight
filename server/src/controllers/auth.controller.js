@@ -67,6 +67,7 @@ export const authController = {
       if (!token) return res.status(401).json({ error: "Not authenticated" });
 
       const decoded = jwt.verify(token, env.JWT_SECRET);
+      
       const user = await userService.findById(decoded.id);
 
       if (!user) return res.status(404).json({ error: "User not found" });

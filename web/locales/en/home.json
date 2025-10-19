@@ -76,12 +76,6 @@
                     "TEXT": "Our head office is located in Yerevan, and deliveries are made throughout Armenia."
                 }
             ]
-        },
-
-        "ledLamps": {
-            "title": "LED Lamps",
-            "text": "LED lamps are energy-efficient and long-lasting lighting solutions",
-            "knowMore": "Learn more"
         }
     }
 }

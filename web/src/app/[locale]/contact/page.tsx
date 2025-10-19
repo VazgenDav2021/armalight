@@ -3,6 +3,8 @@
 import React from "react";
 import { makeGenerateMetadata } from "@/lib/seo";
 import ContactSection from "@/components/ui/client/ContactSection";
+import { Locale } from "@/navigation";
+import Navbar from "@/components/layout/Navbar";
 
 export const generateMetadata = makeGenerateMetadata({
   namespace: "contact",
@@ -13,8 +15,17 @@ export const generateMetadata = makeGenerateMetadata({
   locales: ["hy", "en", "ru"],
 });
 
-const ContactPage = () => {
-  return <ContactSection />;
+const ContactPage = ({
+  params: { locale },
+}: {
+  params: { locale: Locale };
+}) => {
+  return (
+    <>
+      <Navbar locale={locale} />
+      <ContactSection />
+    </>
+  );
 };
 
 export default ContactPage;

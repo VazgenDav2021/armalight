@@ -33,7 +33,7 @@ const Slider = ({ products }: SliderProps) => {
         loop
         className="w-full">
         {products?.map((product) => (
-          <SwiperSlide key={product.id}>
+          <SwiperSlide key={product._id}>
             <ProductCard product={product} />
           </SwiperSlide>
         ))}

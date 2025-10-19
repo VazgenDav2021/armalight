@@ -43,6 +43,7 @@ export interface ProductRaw {
   attributes?: Attributes;
   categoryId: string;
   isBestSeller?: boolean;
+  priceWithDiscount: number;
 }
 
 export type ProductLocale<TLocale extends string | undefined = undefined> =
@@ -80,13 +81,9 @@ export const productService = {
     return res.data as ProductRaw[];
   },
 
-  async getProductById<TLocale extends Locale | undefined = undefined>(
-    id: string,
-    locale?: TLocale
-  ): Promise<ProductLocale<TLocale>> {
-    const query = locale ? `?locale=${locale}` : "";
-    const res = await api.get(`/products/${id}${query}`);
-    return res.data as ProductLocale<TLocale>;
+  async getProductById(id: string, locale: Locale) {
+    const res = await api.get(`/products/${id}?locale=${locale}`);
+    return res.data as ProductRaw;
   },
 
   async updateProduct(id: string, data: Partial<ProductRaw>) {
@@ -102,7 +99,15 @@ export const productService = {
   async getProductsByCategory<Locale>(
     params: GetProductsByCategoryParams
   ): Promise<ProductsByCategoryResponse<Locale>> {
-    const { slug, page = 1, pageSize = 12, q, minPrice, maxPrice, locale } = params;
+    const {
+      slug,
+      page = 1,
+      pageSize = 12,
+      q,
+      minPrice,
+      maxPrice,
+      locale,
+    } = params;
     const query = new URLSearchParams();
 
     query.append("page", page.toString());
@@ -113,12 +118,15 @@ export const productService = {
     if (locale) query.append("locale", locale);
 
     const res = await api.get<ProductsByCategoryResponse<Locale>>(
-      `/categories/${slug}/products?${query.toString()}`
+      `/categories/${slug}/products?${query.toString()}`,
+      { headers: { cookie: `discount=${100}` } }
     );
     return res.data;
   },
 
-  async getBestSellerProducts<TLocale extends "hy" | "en" | "ru">(locale?: TLocale) {
+  async getBestSellerProducts<TLocale extends "hy" | "en" | "ru">(
+    locale?: TLocale
+  ) {
     const query = new URLSearchParams();
     if (locale) query.append("locale", locale);
 
@@ -128,5 +136,4 @@ export const productService = {
 
     return res.data;
   },
-
 };

@@ -9,16 +9,11 @@ export default async function CategorySection({ locale }: { locale: string }) {
     children: { title: string; url: string }[];
   };
 
-  const title = root.title;
   const categories = root.children;
 
   return (
-    <section className="w-full py-12">
+    <section className="">
       <div className="max-w-[1220px] mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-gray-900 mb-8 text-center">
-          {title}
-        </h2>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {categories.map((cat, idx) => (
             <Link

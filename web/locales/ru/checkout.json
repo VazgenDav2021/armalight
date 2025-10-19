@@ -24,7 +24,8 @@
             "CARD_NUMBER": "Номер карты",
             "NAME_SNAME": "Имя и фамилия держателя карты",
             "EXP_DATE": "Срок действия карты",
-            "CODE": "CVV/CVC"
+            "CODE": "CVV/CVC",
+            "PAY_NOW": "Оплатить сейчас"
         },
         "SUMARY": {
             "TITLE": "Корзина",

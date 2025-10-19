@@ -7,9 +7,13 @@ import { authService, UpdateProfileData } from "@/services/authService";
 
 interface IPersonalDataProps {
   personalData: PersonalDataType | null;
+  discount: number | undefined;
 }
 
-export default function PersonalData({ personalData }: IPersonalDataProps) {
+export default function PersonalData({
+  personalData,
+  discount,
+}: IPersonalDataProps) {
   const t = useTranslations("account.PERSONAL_DATA");
 
   const [formData, setFormData] = useState<UpdateProfileData>({
@@ -141,6 +145,18 @@ export default function PersonalData({ personalData }: IPersonalDataProps) {
             onChange={(e) => onChange("address", e.target.value)}
             placeholder={t("address")}
             className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-[#565656] focus:border-brand focus:ring-brand"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-sm font-normal text-[#565656] mb-1">
+            {t("discount")}
+          </label>
+          <input
+            type="text"
+            disabled
+            value={discount ?? ""}
+            className="rounded-md border border-gray-300 bg-gray-100 px-3 py-2 text-sm text-gray-500 cursor-not-allowed"
           />
         </div>
 

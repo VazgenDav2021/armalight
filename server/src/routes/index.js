@@ -8,10 +8,12 @@ import userRoutes from "./user.routes.js";
 import guestOrderRoutes from "./guestOrder.routes.js";
 import messageRoutes from "./message.routes.js";
 import productRoutes from "./product.routes.js"; 
+import cartRoutes from "./cart.routes.js"; 
 
 const router = Router();
 
 router.use(apiLimiter);
+router.use(cartRoutes);
 
 router.use(authRoutes);
 router.use(userRoutes);

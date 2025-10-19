@@ -15,7 +15,10 @@
             "emailPlaceholder": "Email",
             "phonePlaceholder": "Phone",
             "messagePlaceholder": "Write your message",
-            "submit": "Submit"
+            "submit": "Submit",
+            "sending": "Sending...",
+            "successMessage": "Your message has been successfully sent. We will contact you soon.",
+            "errorMessage": "An error occurred while sending your message. Please try again."
         },
         "info": {
             "ourAddress": "Our Address"

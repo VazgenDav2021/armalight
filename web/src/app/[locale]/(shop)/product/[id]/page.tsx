@@ -1,3 +1,4 @@
+import Navbar from "@/components/layout/Navbar";
 import Breadcrumb from "@/components/ui/client/Breadcrumb";
 import ProductDetails from "@/components/ui/client/ProductDetails";
 import { Locale } from "@/navigation";
@@ -7,11 +8,11 @@ interface ProductPageProps {
   params: { id: string; locale: Locale };
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage({ params: { id, locale } }: ProductPageProps) {
   let product: null | ProductLocale<Locale> = null;
 
   try {
-    product = await productService.getProductById(params.id, params.locale);
+    product = await productService.getProductById(id, locale);
   } catch (error) {
     console.error("Ошибка при загрузке товара:", error);
   }
@@ -30,14 +31,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const crumbs = [
     { title: "Главная", url: "/" },
     { title: "Категория", url: `/category/${product.categoryId}` },
-    { title: product.name},
+    { title: product.name },
   ];
 
   return (
-    <div className="container max-w-[1220px] py-12">
-      <Breadcrumb items={crumbs} />
-      <ProductDetails product={product} />
-    </div>
+    <>
+      <Navbar locale={locale} />
+      <div className="container max-w-[1220px] py-12">
+        <Breadcrumb items={crumbs} />
+        <ProductDetails product={product} />
+      </div>
+    </>
   );
 }
-

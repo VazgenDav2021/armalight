@@ -13,10 +13,6 @@
             {
                 "id": "orders",
                 "label": "Order History"
-            },
-            {
-                "id": "cards",
-                "label": "Bank Cards"
             }
         ],
         "PERSONAL_DATA": {
@@ -25,6 +21,7 @@
             "surName": "Last Name",
             "email": "Email",
             "phone": "Phone Number",
+            "discount": "Discount",
             "city": "City",
             "address": "Address",
             "index": "Postal Code",

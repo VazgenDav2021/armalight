@@ -3,8 +3,9 @@
 import ContactForm from "@/components/ui/client/ContactForm";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Toaster } from "react-hot-toast";
 
-export default function ContactPage() {
+export default function ContactSection() {
   const t = useTranslations("contact");
   const tt = useTranslations("common.footer.CONTACT_INFO");
 
@@ -51,6 +52,7 @@ export default function ContactPage() {
           style={{ border: 0 }}
           loading="lazy"></iframe>
       </div>
+      <Toaster position="top-right" />
     </section>
   );
 }

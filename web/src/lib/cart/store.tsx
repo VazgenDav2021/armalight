@@ -1,25 +1,22 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CartItem, User } from "@/lib/types";
+import type { CartItem } from "@/lib/types";
 import { Locale } from "@/navigation";
 import { ProductLocale } from "@/services/productService";
 
 interface CartState {
   items: CartItem[];
-  user: User | null;
   addItem: (p: ProductLocale<Locale>) => void;
   decreaseItem: (productId: string) => void;
   removeItem: (productId: string) => void;
   updateQty: (productId: string, qty: number) => void;
   clear: () => void;
-  setUser: (u: User) => void;
 }
 
 export const useCart = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
-      user: null,
 
       addItem: (p) => {
         const items = get().items;
@@ -70,8 +67,6 @@ export const useCart = create<CartState>()(
         }),
 
       clear: () => set({ items: [] }),
-
-      setUser: (u) => set({ user: u }),
     }),
     { name: "cart-store" }
   )

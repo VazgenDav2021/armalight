@@ -24,7 +24,8 @@
             "CARD_NUMBER": "Card Number",
             "NAME_SNAME": "Cardholder Name",
             "EXP_DATE": "Expiration Date",
-            "CODE": "CVV/CVC"
+            "CODE": "CVV/CVC",
+            "PAY_NOW": "Pay Now"
         },
         "SUMARY": {
             "TITLE": "Cart",
