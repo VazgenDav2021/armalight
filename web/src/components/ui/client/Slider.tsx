@@ -8,11 +8,9 @@ import "swiper/css/pagination";
 
 import ProductCard from "@/components/ui/client/ProductCard";
 import { useTranslations } from "next-intl";
-import { Locale } from "@/navigation";
-import { ProductLocale } from "@/services/productService";
 
 type SliderProps = {
-  products: ProductLocale<Locale>[]
+  products: null
 };
 
 const Slider = ({ products }: SliderProps) => {
@@ -32,11 +30,11 @@ const Slider = ({ products }: SliderProps) => {
         }}
         loop
         className="w-full">
-        {products?.map((product) => (
+        {/* {products?.map((product) => (
           <SwiperSlide key={product._id}>
             <ProductCard product={product} />
           </SwiperSlide>
-        ))}
+        ))} */}
       </Swiper>
     </section>
   );

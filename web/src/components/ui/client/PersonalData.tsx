@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { PersonalData as PersonalDataType } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { UpdateProfileData } from "@/services/authService";
 
 interface IPersonalDataProps {
   personalData: PersonalDataType | null;
@@ -16,7 +15,7 @@ export default function PersonalData({
 }: IPersonalDataProps) {
   const t = useTranslations("account.PERSONAL_DATA");
 
-  const [formData, setFormData] = useState<UpdateProfileData>({
+  const [formData, setFormData] = useState({
     firstName: personalData?.firstName || "",
     lastName: personalData?.lastName || "",
     email: personalData?.email || "",
@@ -41,7 +40,7 @@ export default function PersonalData({
     setIsChanged(changed);
   }, [formData, personalData]);
 
-  const onChange = (field: keyof UpdateProfileData, value: string) => {
+  const onChange = (field: any, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

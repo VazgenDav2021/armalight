@@ -2,11 +2,10 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartItem } from "@/lib/types";
 import { Locale } from "@/navigation";
-import { ProductLocale } from "@/services/productService";
 
 interface CartState {
   items: CartItem[];
-  addItem: (p: ProductLocale<Locale>) => void;
+  addItem: (p: any) => void;
   decreaseItem: (productId: string) => void;
   removeItem: (productId: string) => void;
   updateQty: (productId: string, qty: number) => void;

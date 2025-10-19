@@ -1,4 +1,3 @@
-import { ProductLocale } from "@/services/productService";
 import ProductCard from "./ProductCard";
 import Skeleton from "./Skeleton";
 import { Locale } from "@/navigation";
@@ -9,7 +8,7 @@ export default function SearchResult({
   isLoading,
   pagination,
 }: {
-  products: ProductLocale<Locale>[];
+  products: any
   isLoading: boolean;
   pagination?: {
     page: number;

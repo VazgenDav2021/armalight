@@ -1,16 +1,11 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Locale } from "@/navigation";
-import { ProductLocale } from "@/services/productService";
 import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
 
 const CartControls = dynamic(() => import("./CartControls"), { ssr: false });
 
-export default function ProductDetails({
-  product,
-}: {
-  product: ProductLocale<Locale>;
-}) {
+export default function ProductDetails({ product }: { product: any }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 items-stretch">
       <div className="flex flex-col h-full">
