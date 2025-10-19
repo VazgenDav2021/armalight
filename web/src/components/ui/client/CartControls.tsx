@@ -5,21 +5,16 @@ import { useCart } from "@/lib/cart/store";
 import CartDrawer from "./CartDrawer";
 import { useRouter } from "next/navigation";
 import { Locale } from "@/navigation";
-import { ProductLocale } from "@/services/productService";
 
-export default function CartControls({ product }: { product: ProductLocale<Locale> }) {
+export default function CartControls() {
   const { addItem } = useCart();
   const [count, setCount] = useState(0);
   const [drawerProduct, setDrawerProduct] =
-    useState<ProductLocale<Locale> | null>(null);
+    useState<null>(null);
   const router = useRouter();
 
   const handleAddToCart = () => {
     if (count > 0) {
-      for (let i = 0; i < count; i++) {
-        addItem(product);
-      }
-      setDrawerProduct(product);
       setCount(0);
     } else {
       setCount(1);

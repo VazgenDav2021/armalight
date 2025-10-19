@@ -6,7 +6,11 @@ import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
 
 const CartControls = dynamic(() => import("./CartControls"), { ssr: false });
 
-export default function ProductDetails({ product }: { product: ProductLocale<Locale> }) {
+export default function ProductDetails({
+  product,
+}: {
+  product: ProductLocale<Locale>;
+}) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 items-stretch">
       <div className="flex flex-col h-full">
@@ -60,7 +64,7 @@ export default function ProductDetails({ product }: { product: ProductLocale<Loc
         </div>
 
         <div className="mt-6">
-          <CartControls product={product} />
+          <CartControls />
         </div>
       </div>
     </div>

@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
-import { authService } from "@/services/authService";
 
 const ForgotPasswordPage = () => {
   const t = useTranslations("forgotPassword");
@@ -22,7 +21,6 @@ const ForgotPasswordPage = () => {
 
     try {
       setLoading(true);
-      await authService.forgotPassword({ email });
       toast.success(t("success"));
       setSent(true);
     } catch (err: any) {

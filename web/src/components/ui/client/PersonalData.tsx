@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PersonalData as PersonalDataType } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { authService, UpdateProfileData } from "@/services/authService";
+import { UpdateProfileData } from "@/services/authService";
 
 interface IPersonalDataProps {
   personalData: PersonalDataType | null;
@@ -64,9 +64,7 @@ export default function PersonalData({
     setMessage(null);
 
     try {
-      const updatedUser = await authService.updateProfile(formData);
       setMessage("Данные успешно обновлены!");
-      console.log("Updated user:", updatedUser);
     } catch (err: any) {
       setMessage(err.message || "Ошибка при обновлении данных");
     } finally {

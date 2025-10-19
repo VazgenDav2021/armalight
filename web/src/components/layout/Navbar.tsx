@@ -2,9 +2,9 @@ import LogoIcon from "@/icons/LogoIcon";
 import CartIcon from "@/icons/CartIcon";
 import { getTranslations } from "next-intl/server";
 import { Locale } from "@/navigation";
-import { cookies } from "next/headers";
 import Dropdown from "../ui/client/Dropdown";
 import LanguageSwitcher from "../ui/client/LanguageSwitcher";
+import UserMenu from "../ui/client/UserMenu";
 
 export default async function Navbar({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "common" });
@@ -14,23 +14,6 @@ export default async function Navbar({ locale }: { locale: Locale }) {
     url?: string;
     children?: { title: string; url: string }[];
   }[];
-
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-
-  let user = null;
-  if (token) {
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/me", {
-        headers: { cookie: `token=${token}` },
-        cache: "no-cache",
-      });
-
-      user = await res.json();
-    } catch (e) {
-      console.log({ e });
-    }
-  }
 
   return (
     <header className="fixed top-0 left-0 w-full border-b bg-white z-50">
@@ -57,15 +40,7 @@ export default async function Navbar({ locale }: { locale: Locale }) {
           <LanguageSwitcher />
           <CartIcon />
 
-          {user?.personalData ? (
-            <a className="px-3 py-2 cursor-pointer" href="/account">
-              {user.personalData.firstName}
-            </a>
-          ) : (
-            <a className="px-3 py-2 border rounded" href={`/${locale}/sign-in`}>
-              {t("loginButton.title", { default: "Login" })}
-            </a>
-          )}
+          <UserMenu />
         </nav>
       </div>
     </header>

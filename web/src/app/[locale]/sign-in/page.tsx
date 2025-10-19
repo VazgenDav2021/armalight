@@ -3,13 +3,11 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { authService } from "@/services/authService";
 import { useCart } from "@/lib/cart/store";
 
 export default function SignInPage() {
   const t = useTranslations("signIn");
   const router = useRouter();
-  const { setUser } = useCart();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -31,10 +29,6 @@ export default function SignInPage() {
 
     try {
       setLoading(true);
-      await authService.login({ email, password });
-      const user = await authService.getMe();
-      setUser(user);
-
       router.push("/account");
     } catch (err: any) {
       setError(t("invalidCredentials"));

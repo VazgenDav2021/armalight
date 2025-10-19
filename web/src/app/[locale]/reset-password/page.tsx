@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
-import { authService } from "@/services/authService";
-import { redirect } from "@/navigation";
 
 const ResetPasswordPage = () => {
   const t = useTranslations("resetPassword");
@@ -32,7 +30,6 @@ const ResetPasswordPage = () => {
     }
     try {
       setLoading(true);
-      await authService.resetPassword({ token: token as string, password });
       toast.success(t("success"));
       router.push("/sign-in");
     } catch (err) {

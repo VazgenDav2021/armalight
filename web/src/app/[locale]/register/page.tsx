@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { authService } from "@/services/authService";
 
 export default function RegisterPage() {
   const t = useTranslations("register");
@@ -33,12 +32,6 @@ export default function RegisterPage() {
 
     try {
       setLoading(true);
-      await authService.register({
-        firstName,
-        lastName,
-        email,
-        password,
-      });
       router.push("/account");
     } catch (err: any) {
       setError(err.message || t("registrationFailed") || "Registration failed");

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { messageService } from "@/services/messageService";
 import toast from "react-hot-toast";
 import { validateContactForm } from "@/lib/validation/contactFormValidation";
 import { Locale } from "@/navigation";
@@ -43,12 +42,6 @@ export default function ContactForm() {
 
     try {
       setLoading(true);
-      await messageService.create({
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        message: form.message,
-      });
       toast.success(t("form.successMessage"));
       setForm({ name: "", email: "", phone: "", message: "" });
       setErrors({});

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { authService } from "@/services/authService"; // 👈 импорт сервиса
 
 export default function AccountSidebar() {
   const [active, setActive] = useState("personal");
@@ -25,7 +24,6 @@ export default function AccountSidebar() {
 
   const handleLogout = async () => {
     try {
-      await authService.logout();
       localStorage.removeItem("activeTab");
       router.push("/");
     } catch (err) {

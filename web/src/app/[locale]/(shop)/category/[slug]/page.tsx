@@ -2,7 +2,6 @@ import SearchResult from "@/components/ui/client/SearchResult";
 import CategoryHeader from "@/components/ui/client/CategoryHeader";
 import { getTranslations } from "next-intl/server";
 import { makeGenerateMetadata } from "@/lib/seo";
-import { productService } from "@/services/productService";
 import { Locale } from "@/navigation";
 import Navbar from "@/components/layout/Navbar";
 
@@ -58,15 +57,10 @@ export default async function CategoryPage({
 
   const category = { name: "Example" };
 
-  const products = await productService.getProductsByCategory({
-    slug: slug,
-    page,
-    pageSize,
-    q,
-    minPrice,
-    maxPrice,
-    locale: locale as Locale,
-  });
+  const products = {
+    items: [],
+    total: 0,
+  };
 
   const crumbs = [
     { title: "Главная", url: "/" },

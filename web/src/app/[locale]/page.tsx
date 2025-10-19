@@ -9,7 +9,6 @@ import QuestionsAnswers from "@/components/ui/client/QuestionsAnswers";
 import ProductSlider from "@/components/ui/client/Slider";
 import { makeGenerateMetadata } from "@/lib/seo";
 import { Locale } from "@/navigation";
-import { productService } from "@/services/productService";
 
 export const generateMetadata = makeGenerateMetadata({
   namespace: "home",
@@ -25,7 +24,7 @@ export default async function Home({
 }: {
   params: { locale: Locale };
 }) {
-  const products = await productService.getBestSellerProducts(locale);
+  const products = null;
 
   return (
     <>
@@ -33,7 +32,7 @@ export default async function Home({
       <HeroSection />
       <CategorySection locale={locale} />
       <OurAdvantages />
-      <ProductSlider products={products.items} />
+      <ProductSlider products={[]}/>
       <OurPartners />
       <QuestionsAnswers />
     </>
