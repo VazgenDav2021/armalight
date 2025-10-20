@@ -2,13 +2,14 @@ import ProductCard from "./ProductCard";
 import Skeleton from "./Skeleton";
 import { Locale } from "@/navigation";
 import Pagination from "./Pagination";
+import { LocalizedProduct } from "@/types";
 
 export default function SearchResult({
   products,
   isLoading,
   pagination,
 }: {
-  products: any
+  products: LocalizedProduct[]
   isLoading: boolean;
   pagination?: {
     page: number;

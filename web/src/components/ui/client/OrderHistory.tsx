@@ -1,11 +1,10 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Order, OrderRef } from "@/lib/types";
 import OrderTable from "./OrderTable";
 
 interface OrderHistoryProps {
-  orders: OrderRef;
+  orders: any;
 }
 
 export default function OrderHistory({

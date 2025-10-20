@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PersonalData as PersonalDataType } from "@/lib/types";
 import { useTranslations } from "next-intl";
 
 interface IPersonalDataProps {
-  personalData: PersonalDataType | null;
+  personalData: any | null;
   discount: number | undefined;
 }
 

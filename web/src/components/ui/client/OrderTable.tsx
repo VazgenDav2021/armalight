@@ -2,11 +2,10 @@
 
 import { useState, Fragment } from "react";
 import { useTranslations } from "next-intl";
-import { OrderRef } from "@/lib/types";
 import clsx from "clsx";
 import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
 
-export default function OrderTable({ orders }: { orders: OrderRef }) {
+export default function OrderTable({ orders }: { orders: any }) {
   const t = useTranslations("account.ORDERS");
   const [openRows, setOpenRows] = useState<string[]>([]);
 

@@ -1,61 +1,34 @@
-import api from "@/lib/axios";
+import api from "@/app/utils/axios";
+import { Cart } from "@/types";
 
-export interface CartItem {
+interface UpdateCartItemParams {
   productId: string;
-  qty: number;
-}
-
-export interface AddToCartData {
-  productId: string;
-  qty?: number;
-}
-
-export interface UpdateCartItemData {
-  productId: string;
-  qty: number;
-}
-
-export interface Cart {
-  _id: string;
-  ownerKey: string;
-  items: Array<{
-    productId: {
-      _id: string;
-      title: string;
-      price: number;
-      image?: string;
-    };
-    qty: number;
-  }>;
-  createdAt: string;
-  updatedAt: string;
+  quantity: number;
 }
 
 export const cartService = {
-  async getCart(): Promise<Cart> {
-    const res = await api.get("/cart", { withCredentials: true });
-    return res.data;
+  getCart: async (): Promise<Cart> => {
+    const { data } = await api.get<Cart>("/cart", { withCredentials: true });
+    return data;
   },
 
-  async addItem(data: AddToCartData): Promise<Cart> {
-    const res = await api.post("/cart/add", data, { withCredentials: true });
-    return res.data;
+  updateItem: async ({
+    productId,
+    quantity,
+  }: UpdateCartItemParams): Promise<Cart> => {
+    const { data } = await api.post<Cart>(
+      "/cart/update-item",
+      {
+        productId,
+        quantity,
+      },
+      { withCredentials: true }
+    );
+    return data;
   },
 
-  async updateItem(data: UpdateCartItemData): Promise<Cart> {
-    const res = await api.put("/cart/update", data, { withCredentials: true });
-    return res.data;
-  },
-
-  async removeItem(productId: string): Promise<Cart> {
-    const res = await api.delete(`/cart/remove/${productId}`, {
-      withCredentials: true,
-    });
-    return res.data;
-  },
-
-  async clearCart(): Promise<{ message: string }> {
-    const res = await api.delete("/cart/clear", { withCredentials: true });
-    return res.data;
+  checkout: async (): Promise<{ message: string }> => {
+    const { data } = await api.post("/cart/checkout");
+    return data;
   },
 };

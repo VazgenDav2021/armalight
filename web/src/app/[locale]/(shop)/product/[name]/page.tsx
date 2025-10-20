@@ -2,15 +2,26 @@ import Navbar from "@/components/layout/Navbar";
 import Breadcrumb from "@/components/ui/client/Breadcrumb";
 import ProductDetails from "@/components/ui/client/ProductDetails";
 import { Locale } from "@/navigation";
+import { productService } from "@/services/productService";
+import { LocalizedProduct } from "@/types";
 
 interface ProductPageProps {
-  params: { id: string; locale: Locale };
+  params: { name: string; locale: Locale };
 }
 
 export default async function ProductPage({
-  params: { id, locale },
+  params: { name, locale },
 }: ProductPageProps) {
-  let product = null;
+  let product: LocalizedProduct | null = null;
+
+  try {
+    product = await productService.getProductByName<LocalizedProduct>({
+      name,
+      locale,
+    });
+  } catch (err) {
+    console.error("Product not found:", err);
+  }
 
   if (!product) {
     return (

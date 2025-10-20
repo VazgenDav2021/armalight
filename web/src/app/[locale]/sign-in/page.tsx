@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/lib/cart/store";
 
 export default function SignInPage() {
   const t = useTranslations("signIn");

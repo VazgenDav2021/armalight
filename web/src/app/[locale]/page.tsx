@@ -7,8 +7,10 @@ import OurAdvantages from "@/components/ui/client/OurAdvantages";
 import OurPartners from "@/components/ui/client/OurPartners";
 import QuestionsAnswers from "@/components/ui/client/QuestionsAnswers";
 import ProductSlider from "@/components/ui/client/Slider";
-import { makeGenerateMetadata } from "@/lib/seo";
+import { makeGenerateMetadata } from "@/app/utils/seo";
 import { Locale } from "@/navigation";
+import { LocalizedProduct } from "@/types";
+import { productService } from "@/services/productService";
 
 export const generateMetadata = makeGenerateMetadata({
   namespace: "home",
@@ -24,7 +26,16 @@ export default async function Home({
 }: {
   params: { locale: Locale };
 }) {
-  const products = null;
+  let bestSellers: LocalizedProduct[] = [];
+
+  try {
+    bestSellers = await productService.getBestSellers<LocalizedProduct[]>({
+      locale,
+      discount: 10,
+    });
+  } catch (err) {
+    console.error("Error fetching best sellers:", err);
+  }
 
   return (
     <>
@@ -32,7 +43,7 @@ export default async function Home({
       <HeroSection />
       <CategorySection locale={locale} />
       <OurAdvantages />
-      <ProductSlider products={[]}/>
+      <ProductSlider products={bestSellers} />
       <OurPartners />
       <QuestionsAnswers />
     </>

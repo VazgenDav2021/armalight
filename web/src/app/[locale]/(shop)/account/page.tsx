@@ -1,8 +1,7 @@
 import AccountSidebar from "@/components/ui/client/AccountSidebar";
 import AccountContent from "@/components/ui/client/AccountContent";
-import { makeGenerateMetadata } from "@/lib/seo";
+import { makeGenerateMetadata } from "@/app/utils/seo";
 import { cookies } from "next/headers";
-import { User } from "@/lib/types";
 import Navbar from "@/components/layout/Navbar";
 import { Locale } from "@/navigation";
 
@@ -15,7 +14,7 @@ export const generateMetadata = makeGenerateMetadata({
   locales: ["hy", "en", "ru"],
 });
 
-async function getMeServer(): Promise<User | null> {
+async function getMeServer(): Promise<null> {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) return null;
@@ -29,7 +28,7 @@ async function getMeServer(): Promise<User | null> {
     });
 
     if (!res.ok) return null;
-    return res.json() as Promise<User>;
+    return res.json() as Promise<any>;
   } catch (err) {
     console.error("Error fetching user:", err);
     return null;
@@ -41,7 +40,7 @@ export default async function AccountPageHome({
 }: {
   params: { locale: Locale };
 }) {
-  const user: User | null = await getMeServer();
+  const user: null = await getMeServer();
 
   return (
     <>

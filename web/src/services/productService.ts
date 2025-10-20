@@ -1,139 +1,85 @@
-import api from "@/lib/axios";
-import { Locale } from "@/navigation";
+import api from "@/app/utils/axios";
+import { Product, LocalizedProduct, GetProductByNameParams } from "@/types";
 
-export interface TechnicalField {
-  hy: string;
-  ru: string;
-  en: string;
+interface GetProductsByCategoryParams {
+  categoryId?: string;
+  discount?: number;
+  locale?: string;
 }
 
-export interface Technical {
-  power: TechnicalField;
-  voltage?: TechnicalField;
-  colorTemperature?: TechnicalField;
-  lifetime?: TechnicalField;
-  material?: TechnicalField;
-  protection?: TechnicalField;
-  beamAngle?: TechnicalField;
+interface GetBestSellersParams {
+  discount?: number;
+  locale?: string;
 }
 
-export interface Attributes {
-  color?: string;
-  base?: string;
-  mountType?: string;
-  shape?: string;
-  installation?: string;
+interface CreateProductParams {
+  payload: Partial<Product>;
 }
 
-export interface Translation {
-  hy: string;
-  ru: string;
-  en: string;
+interface UpdateProductParams {
+  id: string;
+  payload: Partial<Product>;
 }
 
-export interface ProductRaw {
-  _id: string;
-  code: string;
-  name: Translation;
-  description?: Translation;
-  shortDetails?: Translation;
-  price: number;
-  image: string[];
-  technical?: Technical;
-  attributes?: Attributes;
-  categoryId: string;
-  isBestSeller?: boolean;
-  priceWithDiscount: number;
-}
-
-export type ProductLocale<TLocale extends string | undefined = undefined> =
-  TLocale extends string
-    ? Omit<ProductRaw, "name" | "description" | "shortDetails"> & {
-        name: string;
-        description?: string;
-        shortDetails?: string;
-      }
-    : ProductRaw;
-
-export interface GetProductsByCategoryParams {
-  slug: string;
-  page?: number;
-  pageSize?: number;
-  q?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  locale?: "hy" | "ru" | "en";
-}
-
-export interface ProductsByCategoryResponse<TLocale = undefined> {
-  total: number;
-  items: ProductLocale<Locale>[];
+interface DeleteProductParams {
+  id: string;
 }
 
 export const productService = {
-  async createProduct(data: ProductRaw) {
-    const res = await api.post("/products", data);
-    return res.data;
-  },
-
-  async getAllProducts() {
-    const res = await api.get("/products");
-    return res.data as ProductRaw[];
-  },
-
-  async getProductById(id: string, locale: Locale) {
-    const res = await api.get(`/products/${id}?locale=${locale}`);
-    return res.data as ProductRaw;
-  },
-
-  async updateProduct(id: string, data: Partial<ProductRaw>) {
-    const res = await api.patch(`/products/${id}`, data);
-    return res.data as ProductRaw;
-  },
-
-  async deleteProduct(id: string) {
-    const res = await api.delete(`/products/${id}`);
-    return res.data;
-  },
-
-  async getProductsByCategory<Locale>(
-    params: GetProductsByCategoryParams
-  ): Promise<ProductsByCategoryResponse<Locale>> {
-    const {
-      slug,
-      page = 1,
-      pageSize = 12,
-      q,
-      minPrice,
-      maxPrice,
-      locale,
-    } = params;
-    const query = new URLSearchParams();
-
-    query.append("page", page.toString());
-    query.append("pageSize", pageSize.toString());
-    if (q) query.append("q", q);
-    if (minPrice !== undefined) query.append("min", minPrice.toString());
-    if (maxPrice !== undefined) query.append("max", maxPrice.toString());
-    if (locale) query.append("locale", locale);
-
-    const res = await api.get<ProductsByCategoryResponse<Locale>>(
-      `/categories/${slug}/products?${query.toString()}`,
-      { headers: { cookie: `discount=${100}` } }
+  getProductsByCategory: async <
+    T extends Product[] | LocalizedProduct[] = Product[]
+  >({
+    categoryId,
+    discount,
+    locale,
+  }: GetProductsByCategoryParams): Promise<T> => {
+    const { data } = await api.get<Product[]>(
+      `/products/category/${categoryId}`,
+      {
+        params: { discount, locale },
+      }
     );
-    return res.data;
+    return data as T;
   },
 
-  async getBestSellerProducts<TLocale extends "hy" | "en" | "ru">(
-    locale?: TLocale
-  ) {
-    const query = new URLSearchParams();
-    if (locale) query.append("locale", locale);
+  getBestSellers: async <T extends Product[] | LocalizedProduct[] = Product[]>({
+    discount,
+    locale,
+  }: GetBestSellersParams = {}): Promise<T> => {
+    const { data } = await api.get<Product[]>("/products/best-sellers", {
+      params: { discount, locale },
+    });
+    return data as T;
+  },
 
-    const res = await api.get<ProductsByCategoryResponse<TLocale>>(
-      `/products/best-seller?${query.toString()}`
-    );
+  createProduct: async ({ payload }: CreateProductParams): Promise<Product> => {
+    const { data } = await api.post<Product>("/products", payload);
+    return data;
+  },
 
-    return res.data;
+  updateProduct: async ({
+    id,
+    payload,
+  }: UpdateProductParams): Promise<Product> => {
+    const { data } = await api.put<Product>(`/products/${id}`, payload);
+    return data;
+  },
+
+  deleteProduct: async ({
+    id,
+  }: DeleteProductParams): Promise<{ message: string }> => {
+    const { data } = await api.delete<{ message: string }>(`/products/${id}`);
+    return data;
+  },
+
+  getProductByName: async <T extends Product | LocalizedProduct = Product>({
+    name,
+    locale,
+    discount,
+  }: GetProductByNameParams): Promise<T> => {
+    const { data } = await api.get<Product>("/products/by-name", {
+      params: { name, locale, discount },
+    });
+    return data as T;
   },
 };

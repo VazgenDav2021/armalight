@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { User } from "@/lib/types";
 
 export default function UserMenu() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any | null>(null);
   const t = useTranslations("common");
 
   if (user?.personalData) {

@@ -2,10 +2,9 @@
 import { useEffect, useState } from "react";
 import PersonalData from "./PersonalData";
 import OrderHistory from "./OrderHistory";
-import { User } from "@/lib/types";
 
 interface AccountContentProps {
-  user: User | null;
+  user: any | null;
 }
 
 export default function AccountContent({ user }: AccountContentProps) {

@@ -1,10 +1,9 @@
 "use client";
 
-import { Payment } from "@/lib/types";
 import Image from "next/image";
 
 interface BankCardsProps {
-  payment: Payment | undefined;
+  payment: any | undefined;
 }
 
 export default function BankCards({ payment }: BankCardsProps) {

@@ -1,7 +1,7 @@
 import SearchResult from "@/components/ui/client/SearchResult";
 import CategoryHeader from "@/components/ui/client/CategoryHeader";
 import { getTranslations } from "next-intl/server";
-import { makeGenerateMetadata } from "@/lib/seo";
+import { makeGenerateMetadata } from "@/app/utils/seo";
 import { Locale } from "@/navigation";
 import Navbar from "@/components/layout/Navbar";
 
@@ -66,10 +66,6 @@ export default async function CategoryPage({
     { title: "Главная", url: "/" },
     { title: category?.name || "Категория" },
   ];
-
-  products.items.map((el) => {
-    console.log({ el });
-  });
 
   return (
     <>

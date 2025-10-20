@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import AboutUsSection from "@/components/ui/client/AboutUsSection";
 import Breadcrumb from "@/components/ui/client/Breadcrumb";
 import OurValues from "@/components/ui/client/OurValues";
-import { makeGenerateMetadata } from "@/lib/seo";
+import { makeGenerateMetadata } from "@/app/utils/seo";
 import { Locale } from "@/navigation";
 
 export const generateMetadata = makeGenerateMetadata({

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
-import { makeGenerateMetadata } from "@/lib/seo";
+import { makeGenerateMetadata } from "@/app/utils/seo";
 
 export const generateMetadata = makeGenerateMetadata({
   namespace: "changePassword",

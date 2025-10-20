@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Locale } from "@/navigation";
+import { LocalizedProduct } from "@/types";
 
 type CartDrawerProps = {
-  product: null
+  product: LocalizedProduct
   onClose: () => void;
   onGoToCart: () => void;
 };
@@ -34,14 +34,14 @@ export default function CartDrawer({
         <div className="flex items-center gap-4 border-b pb-4 mb-4">
           <div className="relative w-20 h-20 border rounded overflow-hidden">
             <Image
-              src={`/common/${"product.image[0]"}`}
-              alt={"product.name"}
+              src={`/common/product1.svg`}
+              alt={product.name}
               fill
               className="object-cover"
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-medium">{"product.description"}</span>
+            <span className="font-medium">{product.name}</span>
           </div>
         </div>
 

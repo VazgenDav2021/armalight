@@ -1,17 +1,21 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { Locale } from "@/navigation";
 import { formatPriceAMD } from "@/app/utils/formatPriceAMD";
+import { LocalizedProduct } from "@/types";
 
 const CartControls = dynamic(() => import("./CartControls"), { ssr: false });
 
-export default function ProductDetails({ product }: { product: any }) {
+export default function ProductDetails({
+  product,
+}: {
+  product: LocalizedProduct;
+}) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 items-stretch">
       <div className="flex flex-col h-full">
         <div className="relative w-full aspect-[4/3] max-h-[311px] border rounded overflow-hidden mb-4">
           <Image
-            src={`/common/${product.image[0]}`}
+            src={`/common/product1.svg`}
             alt={product.name}
             fill
             className="object-cover"
@@ -20,7 +24,7 @@ export default function ProductDetails({ product }: { product: any }) {
         <div className="grid grid-cols-2 gap-2 flex-grow">
           <div className="relative w-full aspect-[4/3] max-h-[255px] border rounded overflow-hidden">
             <Image
-              src={`/common/${product.image[1]}`}
+              src={`/common/product1.svg`}
               alt={product.name}
               fill
               className="object-cover"
@@ -28,7 +32,7 @@ export default function ProductDetails({ product }: { product: any }) {
           </div>
           <div className="relative w-full aspect-[4/3] max-h-[255px] border rounded overflow-hidden">
             <Image
-              src={`/common/${product.image[2]}`}
+              src={`/common/product1.svg`}
               alt={product.name}
               fill
               className="object-cover"
@@ -40,14 +44,14 @@ export default function ProductDetails({ product }: { product: any }) {
         <div className="flex flex-col gap-6">
           <h1 className="text-2xl font-semibold">{product.name}</h1>
           <span className="px-2 py-1 text-xs bg-gray-100 rounded w-fit cursor-pointer">
-            {product.code}
+            {product.sku}
           </span>
           <div className="text-2xl font-bold text-brand">
-            {formatPriceAMD(product.priceWithDiscount)}
+            {formatPriceAMD(product.finalPrice)}
           </div>
 
           <div className="bg-white shadow p-4 rounded space-y-2 flex-1">
-            {Object.entries(product.technical || {}).map(([key, value]) => (
+            {Object.entries(product.specs || {}).map(([key, value]) => (
               <div
                 key={key}
                 className="flex justify-between text-sm border-b last:border-0 py-1">
@@ -59,7 +63,7 @@ export default function ProductDetails({ product }: { product: any }) {
         </div>
 
         <div className="mt-6">
-          <CartControls />
+          <CartControls product={product} />
         </div>
       </div>
     </div>

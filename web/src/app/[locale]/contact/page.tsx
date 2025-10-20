@@ -1,7 +1,7 @@
 "use server";
 
 import React from "react";
-import { makeGenerateMetadata } from "@/lib/seo";
+import { makeGenerateMetadata } from "@/app/utils/seo";
 import ContactSection from "@/components/ui/client/ContactSection";
 import { Locale } from "@/navigation";
 import Navbar from "@/components/layout/Navbar";
